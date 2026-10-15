@@ -1,0 +1,239 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #fff;
+  border-bottom: 1px solid #17365514;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  gap: 32px;
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+  min-height: 48px;
+  color: var(--navy);
+  text-decoration: none;
+}
+.universityLogo {
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 48px;
+  overflow: hidden;
+  mix-blend-mode: multiply;
+}
+.universityLogo img {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  max-width: none;
+  left: -28px;
+  top: -35px;
+}
+.brandDivider {
+  height: 21px;
+  width: 1px;
+  background: #dce3ea;
+}
+.brand strong {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.7px;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
+  min-width: 0;
+}
+.links {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+.links a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  padding-inline: 4px;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5b6777;
+  text-decoration: none;
+  transition: color 0.16s ease;
+}
+.links a:hover,
+.links a[aria-current="page"] {
+  color: var(--primary);
+}
+.linkArrow {
+  display: none;
+}
+.reportAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 44px;
+  padding-block: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: none;
+}
+.reportAction > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  transition:
+    background 0.16s ease,
+    transform 0.16s ease;
+}
+.reportAction:hover > span {
+  background: #062f5e;
+  transform: translate(2px, -2px);
+}
+.menuToggle {
+  display: none;
+}
+.scrolled {
+  box-shadow: 0 4px 18px #17365508;
+}
+@supports (
+  (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))
+) {
+  .scrolled {
+    background: rgb(255 255 255 / 94%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+@media (max-width: 1023px) {
+  .inner {
+    gap: 28px;
+  }
+  .nav {
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .links {
+    position: static;
+    transform: none;
+    margin-inline: auto;
+    gap: 24px;
+  }
+  .links a {
+    font-size: 12px;
+  }
+  .reportAction {
+    gap: 10px;
+  }
+}
+@media (max-width: 767px) {
+  .inner {
+    position: static;
+    min-height: 72px;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand {
+    gap: 14px;
+  }
+  .brand strong {
+    font-size: 19px;
+  }
+  .universityLogo {
+    width: 58px;
+    height: 44px;
+  }
+  .universityLogo img {
+    width: 110px;
+    height: 110px;
+    left: -26px;
+    top: -32px;
+  }
+  .menuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    min-width: 68px;
+    min-height: 44px;
+    padding: 8px 0 8px 8px;
+    background: transparent;
+    border: 0;
+    color: var(--navy);
+    font-size: 12px;
+  }
+  .menuOpen {
+    background: white;
+  }
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 8px 32px 20px;
+    background: white;
+    border-bottom: 1px solid #dce5ed;
+    box-shadow: 0 16px 25px #1736550a;
+    max-height: calc(100svh - 73px);
+    overflow-y: auto;
+  }
+  .navOpen {
+    display: block;
+  }
+  .links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+  }
+  .links a {
+    justify-content: space-between;
+    min-height: 52px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edf1f5;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  .linkArrow {
+    display: block;
+    color: #687b91;
+  }
+  .reportAction {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 16px;
+    padding-block: 7px;
+    font-size: 13px;
+  }
+}
+@media (max-width: 639px) {
+  .nav {
+    padding-inline: 18px;
+  }
+}

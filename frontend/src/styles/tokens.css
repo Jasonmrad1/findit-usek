@@ -1,0 +1,16 @@
+:root {
+  --font: "Poppins", sans-serif;
+  --navy: #1e3052;
+  --primary: #0b437e;
+  --blue-soft: #b3c5d5;
+  --surface: #f5f7fa;
+  --border: #e4e8ed;
+  --text: #202938;
+  --muted: #596b81;
+  font-family: var(--font);
+  color: var(--text);
+  background: white;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}

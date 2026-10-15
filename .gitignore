@@ -1,0 +1,9 @@
+node_modules/
+frontend/dist/
+.env
+**/.env
+.cache/
+artifacts/
+*.log
+playwright-report/
+test-results/

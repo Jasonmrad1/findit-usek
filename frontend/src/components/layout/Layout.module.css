@@ -1,0 +1,177 @@
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  text-decoration: none;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.usekLogo {
+  display: block;
+  position: relative;
+  width: 100px;
+  height: 76px;
+  overflow: hidden;
+  background: white;
+  flex-shrink: 0;
+}
+.usekLogo img {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  max-width: none;
+  left: -42px;
+  top: -52px;
+}
+.serviceName {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #d5dfe8;
+  padding-left: 24px;
+  gap: 2px;
+}
+.serviceName strong {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.3;
+}
+.serviceName > span {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.25px;
+}
+.footer {
+  border-top: 1px solid var(--border);
+  background: white;
+  padding-top: 52px;
+}
+.footerTop {
+  display: grid;
+  grid-template-columns: 1.2fr 0.65fr 1fr;
+  gap: 50px;
+  padding-bottom: 38px;
+}
+.footerTop > div:first-child > p {
+  max-width: 300px;
+  margin-top: 19px;
+}
+.footerTop p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+.footerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 10px;
+}
+.footerLinks a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  width: 132px;
+  text-decoration: none;
+  font-size: 13px;
+  min-height: 44px;
+}
+.footerLinks a:hover {
+  color: var(--navy);
+}
+.footerNote {
+  padding-top: 16px;
+}
+.footerNote :global(.eyebrow) {
+  font-size: 10px;
+  margin-bottom: 12px;
+}
+.footerNote p {
+  margin-bottom: 16px;
+}
+.footerNote a {
+  font-size: 12px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  text-decoration: none;
+  min-height: 32px;
+}
+.footerBottom {
+  border-top: 1px solid var(--border);
+  padding-block: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.footerBottom > span:last-child {
+  color: var(--primary);
+}
+@media (max-width: 1023px) {
+  .wordmark {
+    gap: 17px;
+  }
+  .serviceName {
+    padding-left: 17px;
+  }
+  .serviceName strong {
+    font-size: 24px;
+  }
+  .footerTop {
+    gap: 25px;
+  }
+}
+@media (max-width: 767px) {
+  .usekLogo {
+    width: 80px;
+    height: 62px;
+  }
+  .usekLogo img {
+    width: 150px;
+    height: 150px;
+    left: -36px;
+    top: -44px;
+  }
+  .wordmark {
+    gap: 15px;
+  }
+  .serviceName {
+    padding-left: 15px;
+  }
+  .serviceName strong {
+    font-size: 23px;
+  }
+  .serviceName > span {
+    font-size: 8px;
+  }
+  .footer {
+    padding-top: 34px;
+  }
+  .footerTop {
+    grid-template-columns: 1fr 1fr;
+    gap: 27px;
+  }
+  .footerTop > div:first-child {
+    grid-column: 1 / -1;
+  }
+  .footerLinks {
+    padding-top: 0;
+  }
+  .footerNote {
+    padding-top: 12px;
+  }
+  .footerNote :global(.eyebrow) {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+  }
+  .footerBottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

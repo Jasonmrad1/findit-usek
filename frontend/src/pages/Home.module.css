@@ -1,0 +1,905 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0a345c;
+  color: white;
+}
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 46% 48%;
+  z-index: -3;
+}
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #092e55 0%,
+    #092e55f5 24%,
+    #092e55be 45%,
+    #092e5529 76%,
+    #092e5536 100%
+  );
+  z-index: -2;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #072c53a1, transparent 40%);
+  z-index: -1;
+}
+.heroInner {
+  min-height: 700px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-block: 42px 60px;
+}
+.heroCopy {
+  max-width: 650px;
+  animation: arrive 0.65s ease-out both;
+}
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #d0dfed;
+  margin-bottom: 27px;
+}
+.heroCopy h1 {
+  color: white;
+  font-size: clamp(43px, 5.05vw, 70px);
+  font-weight: 500;
+  letter-spacing: -3px;
+  line-height: 1.12;
+  margin-bottom: 24px;
+}
+.heroCopy h1 > span {
+  color: #bad5ec;
+}
+.heroCopy > p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #e0e8f1;
+  margin-bottom: 27px;
+}
+.heroActions {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.heroActions :global(.button--primary) {
+  background: white;
+  color: var(--primary);
+  border-color: white;
+}
+.heroActions :global(.button--primary):hover {
+  background: #eaf3fb;
+}
+.heroActions :global(.button--secondary) {
+  background: #ffffff05;
+  border-color: #c2d3e080;
+  color: white;
+}
+.heroActions :global(.button--secondary):hover {
+  background: #ffffff14;
+  border-color: #d9e8f5;
+  color: white;
+}
+.heroActions :global(.button) {
+  min-height: 50px;
+  padding-inline: 23px;
+  font-size: 13px;
+  border-radius: 6px;
+}
+.heroSearch {
+  margin-top: 31px;
+  width: min(100%, 540px);
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: white;
+  border: 1px solid white;
+  border-radius: 7px;
+  padding: 7px 7px 7px 18px;
+  color: var(--primary);
+  box-shadow: 0 8px 25px #041e3220;
+}
+.heroSearch:focus-within {
+  outline: 3px solid #bad5ec;
+  outline-offset: 4px;
+}
+.heroSearch input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  height: 43px;
+  font-size: 13px;
+  color: var(--navy);
+  outline: none;
+}
+.heroSearch input::placeholder {
+  color: #68788b;
+  opacity: 1;
+}
+.heroSearch input:focus-visible {
+  outline: none;
+}
+.heroSearch button {
+  width: 43px;
+  min-width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+  background: var(--primary);
+  transition: background 0.2s;
+}
+.heroSearch button:hover {
+  background: #062e5c;
+}
+.heroQuickLinks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 17px;
+  margin-top: 15px;
+  font-size: 10px;
+}
+.heroQuickLinks > span {
+  color: #bdcddd;
+}
+.heroQuickLinks a {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  min-height: 30px;
+}
+.heroQuickLinks a:hover {
+  text-decoration: underline;
+}
+.campusCaption {
+  position: absolute;
+  right: 0;
+  bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.captionLine {
+  width: 34px;
+  height: 1px;
+  background: #e1e8efb3;
+}
+.campusCaption > div > span {
+  font-size: 8px;
+  color: #e4edf6;
+  letter-spacing: 1.6px;
+}
+.campusCaption p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  margin: 6px 0 0;
+  color: white;
+}
+.statsSection {
+  border-bottom: 1px solid var(--border);
+}
+.statsBar {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  padding-block: 32px;
+}
+.statsIntro {
+  flex: 1;
+}
+.statsIntro :global(.eyebrow) {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  margin-bottom: 10px;
+}
+.statsIntro p {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 230px;
+  margin: 0;
+}
+.stats {
+  flex: 2.2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+.stats > div {
+  padding-left: 24px;
+  border-left: 1px solid var(--border);
+}
+.stats strong {
+  display: block;
+  font-size: 35px;
+  line-height: 1.3;
+  color: var(--primary);
+  font-weight: 500;
+  letter-spacing: -1.5px;
+}
+.stats span {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.recent {
+  padding-block: 77px 84px;
+}
+.sectionTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #d5dee8;
+  padding-top: 22px;
+  margin-bottom: 25px;
+  gap: 15px;
+}
+.sectionTop :global(.eyebrow) {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 1.6px;
+}
+.sectionIndex {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 1.2px;
+}
+.recent :global(.section-heading) {
+  margin-bottom: 32px;
+}
+.recent h2 {
+  font-size: clamp(30px, 3.1vw, 42px);
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  margin-bottom: 13px;
+}
+.recent :global(.section-heading) p {
+  font-size: 14px;
+}
+.recent :global(.text-link) {
+  font-size: 13px;
+  gap: 14px;
+}
+.recent article h3 {
+  font-size: 18px;
+}
+.mobileBreak {
+  display: none;
+}
+.community {
+  background: #f3f6f8;
+  border-block: 1px solid #e9edf1;
+  padding-block: 70px;
+}
+.communityGrid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 74px;
+  align-items: center;
+}
+.communityImage {
+  margin: 0;
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #2d463e;
+}
+.communityImage > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% 50%;
+}
+.communityImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #071e24c9, transparent 70%);
+}
+.communityImage figcaption {
+  position: absolute;
+  z-index: 1;
+  left: 29px;
+  right: 29px;
+  bottom: 23px;
+  color: white;
+}
+.communityImage figcaption > span {
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #d8e4e5;
+}
+.communityImage figcaption p {
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: -0.7px;
+  margin: 8px 0 0;
+  line-height: 1.4;
+}
+.photoCorner {
+  position: absolute;
+  z-index: 1;
+  right: 20px;
+  top: 20px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: white;
+  border: 1px solid #ffffff70;
+  padding: 5px 8px;
+  background: #082e4140;
+}
+.communityCopy :global(.eyebrow) {
+  margin-bottom: 18px;
+  font-size: 10px;
+}
+.communityCopy h2 {
+  font-size: clamp(31px, 3vw, 42px);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+}
+.communityCopy h2 > span {
+  color: var(--primary);
+}
+.communityCopy p {
+  max-width: 470px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.95;
+  margin-bottom: 17px;
+}
+.editorialLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 10px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+}
+.editorialLink > span {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #bdcedd;
+  border-radius: 50%;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.editorialLink:hover > span {
+  background: #e4edf6;
+  transform: translate(2px, -2px);
+}
+.how {
+  padding-block: 75px 80px;
+}
+.how :global(.section-heading) {
+  margin-bottom: 36px;
+  align-items: flex-end;
+}
+.how :global(.section-heading) h2 {
+  font-weight: 500;
+  font-size: 40px;
+  letter-spacing: -1.5px;
+  line-height: 1.2;
+  margin: 0;
+}
+.how :global(.section-heading) > p {
+  text-align: right;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.step {
+  border-top: 1px solid #d5dee8;
+  padding-top: 26px;
+}
+.stepNumber {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #60758e;
+  margin-bottom: 24px;
+}
+.step h3 {
+  font-size: 23px;
+  letter-spacing: -0.6px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.step p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--muted);
+  max-width: 310px;
+  min-height: 75px;
+  margin-bottom: 18px;
+}
+.step > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 12px;
+  min-height: 44px;
+}
+.step > a:hover {
+  text-decoration: underline;
+}
+.bottomCta {
+  position: relative;
+  isolation: isolate;
+  background: var(--primary);
+  overflow: hidden;
+}
+.bottomCta > img {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 78%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.bottomCta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #0b437e 10%,
+    #0b437ef2 38%,
+    #0b437ea8 100%
+  );
+  z-index: -1;
+}
+.ctaInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 45px;
+  padding-block: 54px;
+}
+.ctaInner :global(.eyebrow) {
+  color: #d3e3f3;
+  font-size: 9px;
+  margin-bottom: 17px;
+}
+.ctaInner h2 {
+  font-size: 36px;
+  color: white;
+  font-weight: 500;
+  letter-spacing: -1.1px;
+  line-height: 1.3;
+  margin: 0;
+}
+.ctaInner > div:last-child {
+  padding-right: 35px;
+}
+.ctaInner p {
+  font-size: 13px;
+  line-height: 1.9;
+  color: #e4edf6;
+  margin-bottom: 20px;
+}
+.ctaInner :global(.button) {
+  background: white;
+  color: var(--primary);
+  border-color: white;
+  border-radius: 5px;
+  min-height: 49px;
+  font-size: 13px;
+  gap: 35px;
+}
+.ctaInner :global(.button):hover {
+  background: #eaf3fb;
+  border-color: #eaf3fb;
+  color: var(--primary);
+}
+@keyframes arrive {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (min-width: 1600px) {
+  .heroInner {
+    min-height: 720px;
+  }
+}
+@media (max-width: 1023px) {
+  .heroInner {
+    min-height: 640px;
+  }
+  .heroCopy h1 {
+    font-size: 58px;
+  }
+  .campusCaption {
+    right: 5px;
+    bottom: 32px;
+  }
+  .campusCaption > div > span {
+    font-size: 7px;
+  }
+  .captionLine {
+    width: 18px;
+  }
+  .statsBar {
+    padding-block: 27px;
+    gap: 20px;
+  }
+  .stats {
+    gap: 12px;
+    flex: 2.5;
+  }
+  .stats > div {
+    padding-left: 15px;
+  }
+  .stats span {
+    font-size: 9px;
+  }
+  .statsIntro p {
+    font-size: 13px;
+  }
+  .statsIntro :global(.eyebrow) {
+    font-size: 7px;
+  }
+  .communityGrid {
+    gap: 35px;
+  }
+  .communityImage {
+    min-height: 380px;
+  }
+  .steps {
+    gap: 25px;
+  }
+  .step h3 {
+    font-size: 21px;
+  }
+  .step p {
+    min-height: 99px;
+  }
+  .recent :global(.item-grid) > :last-child {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .heroImage {
+    width: 100%;
+    object-position: 55% center;
+  }
+  .heroShade {
+    background: linear-gradient(
+      90deg,
+      #092e55ed 0%,
+      #092e55bf 60%,
+      #092e5573 100%
+    );
+  }
+  .heroInner {
+    min-height: 620px;
+    padding-block: 32px 70px;
+  }
+  .heroCopy {
+    max-width: 580px;
+    width: 100%;
+  }
+  .heroCopy h1 {
+    font-size: clamp(43px, 8vw, 58px);
+    letter-spacing: -2px;
+  }
+  .heroCopy > p {
+    font-size: 14px;
+  }
+  .heroEyebrow {
+    font-size: 9px;
+    letter-spacing: 1.4px;
+  }
+  .heroSearch {
+    max-width: 490px;
+  }
+  .heroSearch input {
+    font-size: 16px;
+  }
+  .campusCaption {
+    left: 0;
+    right: auto;
+    bottom: 22px;
+  }
+  .campusCaption > div > span {
+    display: none;
+  }
+  .campusCaption p {
+    font-size: 10px;
+    margin: 0;
+  }
+  .statsBar {
+    flex-direction: column;
+    align-items: stretch;
+    padding-block: 25px;
+    gap: 23px;
+  }
+  .statsIntro {
+    display: block;
+  }
+  .statsIntro p {
+    font-size: 13px;
+    max-width: none;
+    margin-top: 7px;
+  }
+  .statsIntro :global(.eyebrow) {
+    font-size: 8px;
+    margin: 0;
+  }
+  .stats {
+    border-top: 1px solid var(--border);
+    padding-top: 21px;
+  }
+  .stats > div {
+    padding-left: 12px;
+  }
+  .stats > div:first-child {
+    padding-left: 0;
+    border: 0;
+  }
+  .stats strong {
+    font-size: 28px;
+  }
+  .stats span {
+    font-size: 9px;
+    line-height: 1.7;
+  }
+  .recent {
+    padding-block: 53px;
+  }
+  .recent :global(.section-heading) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .recent :global(.section-heading) p {
+    font-size: 13px;
+  }
+  .community {
+    padding-block: 42px;
+  }
+  .communityGrid {
+    grid-template-columns: 1fr;
+    gap: 33px;
+  }
+  .communityImage {
+    min-height: 310px;
+  }
+  .communityCopy h2 {
+    font-size: 36px;
+  }
+  .communityCopy p {
+    max-width: none;
+  }
+  .steps {
+    gap: 24px;
+  }
+  .step h3 {
+    font-size: 20px;
+  }
+  .step p {
+    min-height: 150px;
+    font-size: 12px;
+  }
+  .ctaInner {
+    gap: 25px;
+  }
+  .ctaInner h2 {
+    font-size: 30px;
+  }
+  .ctaInner > div:last-child {
+    padding-right: 0;
+  }
+}
+@media (max-width: 639px) {
+  .heroInner {
+    min-height: 640px;
+    padding-top: 32px;
+    padding-bottom: 70px;
+  }
+  .heroEyebrow {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+    margin-bottom: 25px;
+  }
+  .heroCopy h1 {
+    font-size: clamp(37px, 10.7vw, 54px);
+    letter-spacing: -1.7px;
+    line-height: 1.15;
+  }
+  .heroCopy > p {
+    font-size: 13px;
+    line-height: 1.9;
+  }
+  .heroActions {
+    gap: 10px;
+  }
+  .heroActions :global(.button) {
+    font-size: 12px;
+    padding-inline: 17px;
+    gap: 10px;
+  }
+  .heroSearch {
+    padding-left: 12px;
+    gap: 9px;
+    margin-top: 28px;
+  }
+  .heroSearch input {
+    font-size: 16px;
+  }
+  .heroQuickLinks {
+    column-gap: 18px;
+    row-gap: 0;
+    font-size: 10px;
+  }
+  .heroQuickLinks > span {
+    width: 100%;
+    font-size: 9px;
+    margin-bottom: 2px;
+  }
+  .campusCaption {
+    bottom: 22px;
+  }
+  .statsBar {
+    padding-block: 22px;
+  }
+  .stats {
+    gap: 8px;
+  }
+  .stats > div {
+    padding-left: 10px;
+  }
+  .stats span {
+    font-size: 8px;
+  }
+  .sectionIndex {
+    display: none;
+  }
+  .sectionTop {
+    margin-bottom: 24px;
+    padding-top: 18px;
+  }
+  .sectionTop :global(.eyebrow) {
+    font-size: 9px;
+  }
+  .recent h2 {
+    font-size: 31px;
+    letter-spacing: -1px;
+    line-height: 1.25;
+  }
+  .mobileBreak {
+    display: block;
+  }
+  .recent :global(.item-grid) > :last-child {
+    display: block;
+  }
+  .recent article h3 {
+    font-size: 18px;
+  }
+  .communityImage {
+    min-height: 270px;
+  }
+  .communityImage figcaption {
+    left: 22px;
+    right: 22px;
+    bottom: 22px;
+  }
+  .communityImage figcaption p {
+    font-size: 24px;
+  }
+  .communityImage figcaption > span {
+    font-size: 7px;
+  }
+  .communityCopy h2 {
+    font-size: 34px;
+  }
+  .communityCopy p {
+    font-size: 14px;
+  }
+  .how {
+    padding-block: 50px;
+  }
+  .how :global(.section-heading) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .how :global(.section-heading) h2 {
+    font-size: 33px;
+    letter-spacing: -1px;
+  }
+  .how :global(.section-heading) > p {
+    text-align: left;
+    font-size: 12px;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .step {
+    padding-top: 22px;
+    padding-left: 48px;
+    position: relative;
+  }
+  .stepNumber {
+    position: absolute;
+    left: 0;
+    top: 27px;
+    font-size: 11px;
+  }
+  .step h3 {
+    font-size: 23px;
+  }
+  .step p {
+    min-height: 0;
+    max-width: none;
+    font-size: 13px;
+    margin-bottom: 9px;
+  }
+  .step > a {
+    font-size: 12px;
+  }
+  .ctaInner {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-block: 40px;
+    gap: 23px;
+  }
+  .ctaInner h2 {
+    font-size: 32px;
+  }
+  .ctaInner p {
+    margin-bottom: 18px;
+  }
+  .bottomCta > img {
+    width: 100%;
+  }
+  .bottomCta::after {
+    background: #0b437ed9;
+  }
+}

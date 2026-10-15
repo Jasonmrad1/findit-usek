@@ -1,0 +1,146 @@
+.card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: white;
+  overflow: hidden;
+  transition:
+    transform 0.18s,
+    box-shadow 0.18s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px #1e305210;
+}
+.cardLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+.cardLink:focus-visible {
+  outline-offset: -4px;
+  border-radius: 13px;
+}
+.cardMedia {
+  position: relative;
+}
+.photo {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #f0f2f4;
+}
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.detail {
+  border-radius: 15px;
+  aspect-ratio: 4/3;
+}
+.preview {
+  border-radius: 9px;
+  aspect-ratio: 16/9;
+  max-width: 340px;
+  margin-top: -10px;
+  margin-bottom: 23px;
+  border: 1px solid var(--border);
+}
+.photoFallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--muted);
+  background: #edf2f7;
+}
+.photoFallback span {
+  font-size: 11px;
+}
+.cardBadges {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  gap: 6px;
+}
+.cardBody {
+  padding: 21px 22px 15px;
+}
+.category {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+}
+.cardBody h3 {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 11px;
+  letter-spacing: -0.25px;
+}
+.cardBody h3 svg {
+  margin-top: 4px;
+  color: var(--primary);
+}
+.cardBody p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.cardBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #eef0f3;
+  padding-top: 12px;
+  gap: 12px;
+}
+.cardBottom span {
+  font-size: 11px;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--muted);
+}
+.cardBottom > span:last-child {
+  color: var(--primary);
+  font-weight: 500;
+}
+.locationLabel {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 9px;
+  border-radius: 4px;
+  background: #fffffff0;
+  padding: 4px 8px;
+}
+@media (max-width: 639px) {
+  .cardBody h3 {
+    font-size: 17px;
+  }
+  .cardBody p,
+  .cardBottom span {
+    font-size: 11px;
+  }
+}

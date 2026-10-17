@@ -20,7 +20,7 @@ export function createApp({ seed = createSeedItems() } = {}) {
   app.use(cors({ origin: allowed }));
   app.use(express.json({ limit: "32kb" }));
   app.use("/items", itemRoutes(controller));
-  app.use((_req, res) =>
+  app.all("/{*splat}", (_req, res) =>
     res.status(404).json({ message: "Endpoint not found." }),
   );
   app.use(errorHandler);

@@ -14,7 +14,8 @@ import { selectRecent, selectStats } from "../features/items/itemsSelectors.js";
 import styles from "./Home.module.css";
 
 export default function HomePage() {
-  const { status, error, complete, retry } = useCollection();
+  const { status, error, retry } = useCollection();
+  const loaded = status === "succeeded";
   const recent = useSelector(selectRecent);
   const stats = useSelector(selectStats);
   const [query, setQuery] = useState("");
@@ -116,7 +117,7 @@ export default function HomePage() {
             ].map(([key, label]) => (
               <div key={key}>
                 <strong>
-                  {complete ? String(stats[key]).padStart(2, "0") : "—"}
+                  {loaded ? String(stats[key]).padStart(2, "0") : "—"}
                 </strong>
                 <span>{label}</span>
               </div>
@@ -141,7 +142,7 @@ export default function HomePage() {
             Explore all items <ArrowUpRight size={18} />
           </Link>
         </div>
-        {(status === "loading" && !complete) || status === "idle" ? (
+        {status === "loading" || status === "idle" ? (
           <LoadingSkeleton />
         ) : error ? (
           <ErrorState message={error.message} onRetry={retry} />

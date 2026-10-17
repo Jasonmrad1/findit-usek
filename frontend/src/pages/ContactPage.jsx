@@ -17,15 +17,12 @@ export default function ContactPage() {
     subject: "",
     message: "",
   });
-  const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [success, setSuccess] = useState(false);
   const summaryRef = useRef(null);
   const successRef = useRef(null);
   const allErrors = validateContact(values);
-  const errors = Object.fromEntries(
-    Object.entries(allErrors).filter(([name]) => submitted || touched[name]),
-  );
+  const errors = submitted ? allErrors : {};
   function field(name) {
     return {
       value: values[name],
@@ -34,7 +31,6 @@ export default function ContactPage() {
         setSuccess(false);
         setValues((current) => ({ ...current, [name]: event.target.value }));
       },
-      onBlur: () => setTouched((current) => ({ ...current, [name]: true })),
     };
   }
   function submit(event) {

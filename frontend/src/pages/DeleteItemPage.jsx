@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Trash2, AlertTriangle } from "lucide-react";
@@ -20,13 +20,11 @@ export default function DeleteItemPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const mutation = useSelector((state) => state.items.mutation);
-  const lock = useRef(false);
   useEffect(() => {
     dispatch(clearMutation());
   }, [dispatch, id]);
   async function confirm() {
-    if (lock.current) return;
-    lock.current = true;
+    if (mutation.status === "loading") return;
     try {
       await dispatch(deleteItem(id)).unwrap();
       navigate("/items", {
@@ -36,8 +34,6 @@ export default function DeleteItemPage() {
       });
     } catch (failure) {
       if (failure.status === 404) retry();
-    } finally {
-      lock.current = false;
     }
   }
   return (

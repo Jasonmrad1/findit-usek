@@ -57,7 +57,7 @@ The visual refinement uses the supplied campus panorama for the homepage hero an
 ```text
 frontend/src/
   app/              Store and route definitions
-  features/items/   Fetch wrapper, async thunks, canonical Redux entities, selectors, read hooks
+  features/items/   API requests, Redux item state, selectors, and fetching hooks
   components/       Shared UI, layout, item cards/photos/filters/form
   pages/            Eight required views plus 404
   styles/           Global design tokens and base styles
@@ -79,10 +79,10 @@ e2e/                Real API browser acceptance tests
 1. A route page dispatches a Redux Toolkit async thunk.
 2. The central fetch service sends an HTTP request to Express.
 3. Express validates and reads/changes its array, returning JSON.
-4. Fulfilled reducers reconcile the returned object with canonical Redux entities.
+4. Redux reducers update the item array and selected item from the API response.
 5. Selectors derive counts, recent items and filtered lists. Components receive items through props.
 
-Form values, errors, previews, menu state and Contact feedback belong in local React state. Explore filters belong in URL search parameters. Reads track request IDs; successful mutations advance a revision so earlier reads cannot overwrite saved changes. A partial detail cache never supplies complete collection statistics. No localStorage is used.
+Form values, errors, previews, menu state and Contact feedback belong in local React state. Explore filters belong in URL search parameters. Redux keeps a plain item array, one selected item, and loading/error states for fetching and saving. Collection pages fetch the full list; detail pages fetch one item by ID. No localStorage is used.
 
 Backend flow: routes ? controllers ? services ? repository. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns one shared in-memory array and monotonic ID counter per server process, and returns copies. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
 

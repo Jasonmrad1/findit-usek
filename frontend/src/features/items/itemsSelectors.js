@@ -1,13 +1,13 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { itemSelectors } from "./itemsSlice.js";
+const selectItems = (state) => state.items.items;
 
-export const selectStats = createSelector(itemSelectors.selectAll, (items) => ({
+export const selectStats = createSelector(selectItems, (items) => ({
   total: items.length,
   lost: items.filter((item) => item.type === "Lost").length,
   found: items.filter((item) => item.type === "Found").length,
   returned: items.filter((item) => item.returned).length,
 }));
-export const selectRecent = createSelector(itemSelectors.selectAll, (items) =>
+export const selectRecent = createSelector(selectItems, (items) =>
   [...items]
     .filter((item) => !item.returned)
     .sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id)

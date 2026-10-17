@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useSearchParams } from "react-router";
 import { Plus, ArrowDownUp, Info } from "lucide-react";
 import {
@@ -15,10 +14,11 @@ import { filterItems } from "../features/items/itemsSelectors.js";
 import styles from "./Pages.module.css";
 
 export default function ItemsPage() {
-  const { items, status, error, complete, retry } = useCollection();
+  const { items, status, error, retry } = useCollection();
+  const loaded = status === "succeeded";
   const [params, setParams] = useSearchParams();
-  const filters = useMemo(() => Object.fromEntries(params), [params]);
-  const filtered = useMemo(() => filterItems(items, filters), [items, filters]);
+  const filters = Object.fromEntries(params);
+  const filtered = filterItems(items, filters);
   function change(key, value) {
     const next = new URLSearchParams(params);
     if (value) next.set(key, value);
@@ -47,7 +47,7 @@ export default function ItemsPage() {
       />
       <div className={styles.resultsBar}>
         <p>
-          <strong>{complete ? filtered.length : "—"}</strong>{" "}
+          <strong>{loaded ? filtered.length : "—"}</strong>{" "}
           {filtered.length === 1 ? "item" : "items"} on the noticeboard
         </p>
         <label>
@@ -62,7 +62,7 @@ export default function ItemsPage() {
           </select>
         </label>
       </div>
-      {(status === "loading" && !complete) || status === "idle" ? (
+      {status === "loading" || status === "idle" ? (
         <LoadingSkeleton />
       ) : error ? (
         <ErrorState message={error.message} onRetry={retry} />

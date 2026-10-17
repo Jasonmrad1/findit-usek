@@ -1,35 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchItem, fetchItems, itemSelectors } from "./itemsSlice.js";
+import { fetchItem, fetchItems } from "./itemsSlice.js";
 
 export function useCollection() {
   const dispatch = useDispatch();
+  const items = useSelector((state) => state.items.items);
   const collection = useSelector((state) => state.items.collection);
-  const items = useSelector(itemSelectors.selectAll);
+
   useEffect(() => {
     dispatch(fetchItems());
   }, [dispatch]);
-  useEffect(() => {
-    if (collection.status === "succeeded" && !collection.complete)
-      dispatch(fetchItems());
-  }, [dispatch, collection.status, collection.complete]);
-  return { items, ...collection, retry: () => dispatch(fetchItems()) };
+
+  return {
+    items,
+    ...collection,
+    retry: () => dispatch(fetchItems()),
+  };
 }
 
 export function useItem(id) {
   const dispatch = useDispatch();
-  const item = useSelector((state) =>
-    itemSelectors.selectById(state, Number(id)),
-  );
-  const read = useSelector((state) => state.items.reads[id]);
+  const [requestedId, setRequestedId] = useState(null);
+  const item = useSelector((state) => state.items.currentItem);
+  const detail = useSelector((state) => state.items.detail);
+  const matches = requestedId === id && detail.id === String(id);
+
   useEffect(() => {
-    const promise = dispatch(fetchItem(id));
-    return () => promise.abort();
+    dispatch(fetchItem(id));
+    setRequestedId(id);
   }, [dispatch, id]);
+
   return {
-    item,
-    status: read?.status || "idle",
-    error: read?.error,
+    item: matches ? item : null,
+    status: matches ? detail.status : "idle",
+    error: matches ? detail.error : null,
     retry: () => dispatch(fetchItem(id)),
   };
 }

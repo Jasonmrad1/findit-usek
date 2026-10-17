@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowRight,
   ImagePlus,
@@ -20,15 +20,8 @@ import ItemPhoto from "./ItemPhoto.jsx";
 import styles from "./Form.module.css";
 
 function PhotoPreview({ url, label }) {
-  const [preview, setPreview] = useState("");
+  const preview = url && isImageUrl(url) ? url : "";
   const [failed, setFailed] = useState("");
-  useEffect(() => {
-    const timer = setTimeout(
-      () => setPreview(url && isImageUrl(url) ? url : ""),
-      350,
-    );
-    return () => clearTimeout(timer);
-  }, [url]);
   if (!preview) return null;
   return (
     <>
@@ -56,20 +49,11 @@ export default function ItemForm({
   error,
 }) {
   const [values, setValues] = useState(initialValues);
-  const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [serverErrors, setServerErrors] = useState({});
   const summaryRef = useRef(null);
-  const lock = useRef(false);
   const result = validateItem(values);
-  const errors = {
-    ...Object.fromEntries(
-      Object.entries(result.errors).filter(
-        ([name]) => submitted || touched[name],
-      ),
-    ),
-    ...serverErrors,
-  };
+  const errors = submitted ? { ...result.errors, ...serverErrors } : {};
   const isFound = values.type === "Found";
   const field = (name) => ({
     value: values[name],
@@ -82,25 +66,21 @@ export default function ItemForm({
         return next;
       });
     },
-    onBlur: () => setTouched((current) => ({ ...current, [name]: true })),
   });
   async function submit(event) {
     event.preventDefault();
-    if (lock.current || pending) return;
+    if (pending) return;
     setSubmitted(true);
     setServerErrors({});
     if (!result.valid) {
       requestAnimationFrame(() => summaryRef.current?.focus());
       return;
     }
-    lock.current = true;
     try {
       await onSubmit(result.value);
     } catch (failure) {
       setServerErrors(failure.errors || {});
       requestAnimationFrame(() => summaryRef.current?.focus());
-    } finally {
-      lock.current = false;
     }
   }
   return (

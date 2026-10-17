@@ -7,7 +7,7 @@ export function createApp() {
   const app = express();
   app.use(cors());
   app.use(express.json({ limit: "32kb" }));
-  app.use("/items", itemRouter.itemRoutes());
+  app.use("/items", itemRouter.itemRoutes);
   app.all("/{*splat}", (_req, res) =>
     res.status(404).json({ message: "Endpoint not found." }),
   );

@@ -13,11 +13,7 @@ export function createApp({ seed = createSeedItems() } = {}) {
   const service = createItemService(repository);
   const controller = itemController(service);
   app.disable("x-powered-by");
-  const allowed = [
-    process.env.CLIENT_ORIGIN || "http://localhost:5173",
-    "http://127.0.0.1:5173",
-  ];
-  app.use(cors({ origin: allowed }));
+  app.use(cors());
   app.use(express.json({ limit: "32kb" }));
   app.use("/items", itemRoutes(controller));
   app.all("/{*splat}", (_req, res) =>

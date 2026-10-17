@@ -17,7 +17,7 @@ npm run dev
 - API: http://localhost:3001/items
 - Press Ctrl+C to stop both applications.
 
-The defaults work without environment files. To customize them, copy `frontend/.env.example` to `frontend/.env` and `backend/.env.example` to `backend/.env`. Vite reads `VITE_API_BASE_URL` (defaults to `/api`, proxied to the local API); the API reads `PORT` and `CLIENT_ORIGIN`. Restart after changing configuration. The API allows the configured frontend origin and `http://127.0.0.1:5173`.
+The defaults work without environment files. To customize them, copy `frontend/.env.example` to `frontend/.env` and `backend/.env.example` to `backend/.env`. Vite reads `VITE_API_BASE_URL` (defaults to `/api`, proxied to the local API); the API reads `PORT`. Restart after changing configuration. The API allows requests from all origins through `cors()`.
 
 Use `npm run dev:frontend` and `npm run dev:backend` for separate terminals. `npm run build` writes the production SPA into `frontend/dist`. To inspect that build locally, run `npm run start -w backend` in one terminal and `npm run preview -w frontend` in another. Vite serves direct SPA URLs in development and preview; any future static host must rewrite application routes to `index.html`.
 

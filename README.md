@@ -86,6 +86,28 @@ Form values, errors, previews, menu state and Contact feedback belong in local R
 
 Backend flow: routes ? controllers ? services ? repository. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns one shared in-memory array and monotonic ID counter per server process, and returns copies. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
 
+### Backend request flow
+
+```mermaid
+flowchart TD
+    Client["React frontend / HTTP client"] --> Server["server.js: CORS and JSON middleware"]
+    Server --> Router["itemRoutes.js: Express Router<br/>GET and POST /items<br/>GET, PUT and DELETE /items/:id"]
+    Router --> Controller["itemController.js<br/>Read request and send response"]
+    Controller --> Service["itemService.js<br/>Validate input and check item IDs"]
+    Service --> Repository["itemRepository.js<br/>Read, create, update and delete items"]
+    Repository --> Store["Shared in-memory items array and nextId"]
+    Seeds["data/items.js<br/>14 demo items"] -. "initialize at startup" .-> Store
+    Service -. "field validation" .-> Validation["shared/itemValidation.js"]
+    Repository -. "return data" .-> Service
+    Service -. "return result" .-> Controller
+    Controller --> Response["HTTP response<br/>JSON, or 204 after delete"]
+    Router -- "no matching route" --> NotFound["server.js: final splat<br/>404 JSON response"]
+    Server -. "malformed JSON" .-> Errors["errorHandler.js<br/>Error status and JSON message"]
+    Service -. "validation or missing-item error" .-> Errors
+```
+
+The Router selects a controller. The controller calls the service, and the service uses the repository to access the shared array. The final splat handles unmatched URLs; error middleware handles thrown errors. Restarting the backend restores the demo items.
+
 ## Item and API
 
 An Item has **11 properties**: numeric immutable `id`; strings `title`, `description`, `category`, `type`, `location`, `date`, `contactEmail`, `imageUrl`, `locationImageUrl`; and boolean `returned`. Open/Returned is derived from that one boolean.

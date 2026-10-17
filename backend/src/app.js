@@ -19,9 +19,7 @@ export function createApp({ seed = createSeedItems() } = {}) {
   ];
   app.use(cors({ origin: allowed }));
   app.use(express.json({ limit: "32kb" }));
-  // The Vite proxy strips /api in development; Vercel forwards the public
-  // /api prefix to its catch-all function, so accept both request paths.
-  app.use(["/items", "/api/items"], itemRoutes(controller));
+  app.use("/items", itemRoutes(controller));
   app.use((_req, res) =>
     res.status(404).json({ message: "Endpoint not found." }),
   );

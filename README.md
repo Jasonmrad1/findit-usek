@@ -21,6 +21,27 @@ The defaults work without environment files. To customize them, copy `frontend/.
 
 Use `npm run dev:frontend` and `npm run dev:backend` for separate terminals. `npm run build` writes the production SPA into `frontend/dist`. To inspect that build locally, run `npm run start -w backend` in one terminal and `npm run preview -w frontend` in another. Vite serves direct SPA URLs in development and preview; any future static host must rewrite application routes to `index.html`.
 
+## Vercel deployment branch
+
+`main` remains the local Express version. Use `vercel-deployment` for Vercel.
+In the Vercel project, set **Root Directory** to the repository root (`.`), not
+`frontend` or `backend`, and use the **Other** framework preset. The root
+`vercel.json` builds the existing UI into `frontend/dist` and configures the
+Node function at `api/index.js`, including its backend and shared source files.
+Keep `VITE_API_BASE_URL` unset (the default is `/api`). Select this branch when
+creating a deployment; pushing it does not change the `main` branch.
+
+API requests are rewritten to the Express function with their original URL and
+query string. `/api/items` returns the fourteen seeded reports, `/api/items/1`
+returns the first report, and missing API routes/items return JSON errors.
+The SPA fallback excludes `/api`, while existing static files and client routes
+such as `/items/1` continue to serve the UI.
+
+The demo store remains in memory: warm requests to one function instance can
+share changes, but cold starts and separate instances get fresh seed data.
+After deployment, check that `/api/items` and `/api/items/1` have an
+`application/json` content type and that refreshing `/items/1` opens the UI.
+
 ## Open on your phone
 
 Run `npm run dev`, connect your phone and computer to the same Wi-Fi, and open the Network URL printed by Vite. The frontend listens on the local network and sends `/api` requests through Vite to the backend on port 3001. Keep both processes running. If port 5173 is already occupied, run `npm run dev -w frontend -- --port 5174` with the backend running. If Windows asks, allow Node.js on private networks.

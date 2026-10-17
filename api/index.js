@@ -1,11 +1,5 @@
 import { createApp } from "../backend/src/app.js";
 
-const app = createApp();
-
-export default function handler(req, res) {
-  const url = new URL(req.url, "http://localhost");
-  const route = (url.searchParams.get("path") || "").replace(/^\/+/, "");
-  url.searchParams.delete("path");
-  req.url = `/${route}${url.search}`;
-  return app(req, res);
-}
+// Keep the original URL and query string so Express handles /api/items and IDs.
+// One app per warm function instance preserves the existing seeded demo store.
+export default createApp();

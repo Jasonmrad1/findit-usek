@@ -12,7 +12,6 @@ export function createApp({ seed = createSeedItems() } = {}) {
   const repository = createItemRepository(seed);
   const service = createItemService(repository);
   const controller = itemController(service);
-  app.disable("x-powered-by");
   app.use(cors());
   app.use(express.json({ limit: "32kb" }));
   app.use("/items", itemRoutes(controller));

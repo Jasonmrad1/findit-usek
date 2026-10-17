@@ -1,22 +1,22 @@
 import * as itemService from "../services/itemService.js";
 
-export function list(store, _req, res) {
-  res.json(itemService.listItems(store));
+export function list(_req, res) {
+  res.json(itemService.listItems());
 }
 
-export function get(store, req, res) {
-  res.json(itemService.getItem(store, req.params.id));
+export function get(req, res) {
+  res.json(itemService.getItem(req.params.id));
 }
 
-export function create(store, req, res) {
-  res.status(201).json(itemService.createItem(store, req.body));
+export function create(req, res) {
+  res.status(201).json(itemService.createItem(req.body));
 }
 
-export function update(store, req, res) {
-  res.json(itemService.updateItem(store, req.params.id, req.body));
+export function update(req, res) {
+  res.json(itemService.updateItem(req.params.id, req.body));
 }
 
-export function remove(store, req, res) {
-  itemService.removeItem(store, req.params.id);
+export function remove(req, res) {
+  itemService.removeItem(req.params.id);
   res.status(204).end();
 }

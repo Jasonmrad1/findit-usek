@@ -62,7 +62,7 @@ frontend/src/
   pages/            Eight required views plus 404
   styles/           Global design tokens and base styles
 backend/src/
-  app.js            Composes middleware and per-app dependencies
+  app.js            Composes middleware and item routes
   server.js         Starts the local HTTP server
   data/             Fictional seed items
   routes/           Five item REST endpoints
@@ -85,7 +85,7 @@ e2e/                Real API browser acceptance tests
 
 Form values, errors, previews, menu state and Contact feedback belong in local React state. Explore filters belong in URL search parameters. Reads track request IDs; successful mutations advance a revision so earlier reads cannot overwrite saved changes. A partial detail cache never supplies complete collection statistics. No localStorage is used.
 
-Backend flow: routes ? controllers ? services ? repository. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns the array and monotonic IDs, returns copies, and is created per application instance. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
+Backend flow: routes ? controllers ? services ? repository. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns one shared in-memory array and monotonic ID counter per server process, and returns copies. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
 
 ## Item and API
 

@@ -1,12 +1,12 @@
 import { Router } from "express";
 import * as itemController from "../controllers/itemController.js";
 
-export function itemRoutes(store) {
+export function itemRoutes() {
   const router = Router();
-  router.get("/", (req, res) => itemController.list(store, req, res));
-  router.get("/:id", (req, res) => itemController.get(store, req, res));
-  router.post("/", (req, res) => itemController.create(store, req, res));
-  router.put("/:id", (req, res) => itemController.update(store, req, res));
-  router.delete("/:id", (req, res) => itemController.remove(store, req, res));
+  router.get("/", itemController.list);
+  router.get("/:id", itemController.get);
+  router.post("/", itemController.create);
+  router.put("/:id", itemController.update);
+  router.delete("/:id", itemController.remove);
   return router;
 }

@@ -22,26 +22,26 @@ function validate(values, creating = false) {
   return result.value;
 }
 
-export function listItems(store) {
-  return itemRepository.findAll(store);
+export function listItems() {
+  return itemRepository.findAll();
 }
 
-export function getItem(store, id) {
-  const item = itemRepository.findById(store, parseId(id));
+export function getItem(id) {
+  const item = itemRepository.findById(parseId(id));
   if (!item) throw new ApiError(404, "Item not found.");
   return item;
 }
 
-export function createItem(store, values) {
-  return itemRepository.insert(store, validate(values, true));
+export function createItem(values) {
+  return itemRepository.insert(validate(values, true));
 }
 
-export function updateItem(store, id, values) {
-  const existing = getItem(store, id);
-  return itemRepository.replace(store, existing.id, validate(values));
+export function updateItem(id, values) {
+  const existing = getItem(id);
+  return itemRepository.replace(existing.id, validate(values));
 }
 
-export function removeItem(store, id) {
-  const existing = getItem(store, id);
-  itemRepository.remove(store, existing.id);
+export function removeItem(id) {
+  const existing = getItem(id);
+  itemRepository.remove(existing.id);
 }

@@ -1,7 +1,10 @@
+import { loadEnvFile } from "node:process";
 import express from "express";
 import cors from "cors";
 import * as itemRouter from "./routes/itemRoutes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
+
+loadEnvFile();
 
 const app = express();
 const port = Number(process.env.PORT) || 3001;

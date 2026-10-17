@@ -12,13 +12,7 @@ function parseId(value) {
 
 function validate(values, creating = false) {
   const result = itemValidation.validateItem(values, { creating });
-  if (!result.valid) {
-    throw new ApiError(
-      400,
-      "Please correct the highlighted fields.",
-      result.errors,
-    );
-  }
+  if (!result.valid) throw new ApiError(400, "Please correct the highlighted fields.", result.errors,);
   return result.value;
 }
 

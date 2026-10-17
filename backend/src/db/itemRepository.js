@@ -1,6 +1,5 @@
 import * as itemData from "../data/items.js";
 
-// One shared in-memory collection for this server process.
 let items = itemData.createSeedItems();
 let nextId = items.reduce((max, item) => Math.max(max, item.id), 0) + 1;
 

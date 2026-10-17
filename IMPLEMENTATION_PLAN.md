@@ -97,7 +97,7 @@ Seed ten fictional reports, five Lost/five Found, two Returned; varied dates/cat
 ## 6. Components, folders, state
 
 Root: package.json, lockfile, README, this plan, shared/itemValidation.js, frontend/, backend/, e2e/.
-Backend: src/app.js (fresh testable app), server.js, data/items.js, routes/itemRoutes.js, controllers/itemController.js, tests, .env.example.
+Backend: src/server.js (Express setup and HTTP listener), data/items.js, routes/itemRoutes.js, controllers/itemController.js, tests, .env.example.
 Frontend: src/app/{store,router}, features/items/{itemsApi,itemsSlice,itemsSelectors}, components/{common,layout,items}, pages/, styles/{tokens,global}, main/App; public/images; tests; .env.example.
 
 Composition: Provider > BrowserRouter > App > SiteHeader + RouteFeedback + main/PageContainer/route page + SiteFooter.

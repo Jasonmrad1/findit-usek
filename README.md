@@ -62,8 +62,7 @@ frontend/src/
   pages/            Eight required views plus 404
   styles/           Global design tokens and base styles
 backend/src/
-  app.js            Composes middleware and item routes
-  server.js         Starts the local HTTP server
+  server.js         Sets up Express middleware/routes and starts the HTTP server
   data/             Fictional seed items
   routes/           Five item REST endpoints
   controllers/      HTTP requests, responses and status codes

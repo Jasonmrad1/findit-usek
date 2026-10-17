@@ -1,3 +1,4 @@
+import { findAll, findById, insert, replace, remove } from "../db/itemRepository.js";
 import { validateReport } from "../../../shared/itemReport.js";
 import { ApiError } from "../errors/ApiError.js";
 
@@ -21,26 +22,26 @@ function validate(values, creating = false) {
   return result.value;
 }
 
-export function listItems(repository) {
-  return repository.findAll();
+export function listItems(store) {
+  return findAll(store);
 }
 
-export function getItem(repository, id) {
-  const item = repository.findById(parseId(id));
+export function getItem(store, id) {
+  const item = findById(store, parseId(id));
   if (!item) throw new ApiError(404, "Report not found.");
   return item;
 }
 
-export function createItem(repository, values) {
-  return repository.insert(validate(values, true));
+export function createItem(store, values) {
+  return insert(store, validate(values, true));
 }
 
-export function updateItem(repository, id, values) {
-  const existing = getItem(repository, id);
-  return repository.replace(existing.id, validate(values));
+export function updateItem(store, id, values) {
+  const existing = getItem(store, id);
+  return replace(store, existing.id, validate(values));
 }
 
-export function removeItem(repository, id) {
-  const existing = getItem(repository, id);
-  repository.remove(existing.id);
+export function removeItem(store, id) {
+  const existing = getItem(store, id);
+  remove(store, existing.id);
 }

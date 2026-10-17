@@ -78,7 +78,7 @@ const slice = createSlice({
       state.collection.status = action.meta.aborted ? "idle" : "failed";
       state.collection.error = action.meta.aborted
         ? null
-        : action.payload || { message: "Unable to load reports." };
+        : action.payload || { message: "Unable to load items." };
     });
     builder.addCase(fetchItem.pending, (state, action) => {
       state.reads[action.meta.arg] = {
@@ -101,7 +101,7 @@ const slice = createSlice({
       read.status = action.meta.aborted ? "idle" : "failed";
       read.error = action.meta.aborted
         ? null
-        : action.payload || { message: "Unable to load this report." };
+        : action.payload || { message: "Unable to load this item." };
       if (read.error?.status === 404) {
         adapter.removeOne(state, Number(action.meta.arg));
         state.collection.complete = false;

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Mail } from "lucide-react";
-import { validateContact } from "../../../shared/itemReport.js";
+import { validateContact } from "../../../shared/itemValidation.js";
 import {
   Button,
   ErrorSummary,
@@ -82,7 +82,7 @@ export default function ContactPage() {
               <strong>Looking for a lost item?</strong>
               <p>
                 Explore the noticeboard and contact the email on an individual
-                report.
+                item.
               </p>
               <Link className="text-link" to="/items">
                 Explore items <ArrowRight size={14} />

@@ -35,7 +35,7 @@ export default function ItemDetailsPage() {
     return (
       <div className="container page">
         <h1 className="sr-only" tabIndex={-1}>
-          Report unavailable
+          Item unavailable
         </h1>
         <ErrorState
           message={error?.message}
@@ -59,7 +59,7 @@ export default function ItemDetailsPage() {
             {item.imageUrl?.startsWith("/images/") &&
               item.imageUrl.endsWith(".svg") && (
                 <p className={styles.imageCaption}>
-                  Illustrative demo image · not a photograph of a reported item
+                  Illustrative demo image · not a photograph of a listed item
                 </p>
               )}
           </div>
@@ -81,7 +81,7 @@ export default function ItemDetailsPage() {
                 {item.locationImageUrl.startsWith("/images/") &&
                 item.locationImageUrl.endsWith(".svg")
                   ? "Illustrative location · not verified campus imagery"
-                  : "Location photo shared with this report · unverified"}
+                  : "Location photo shared with this item · unverified"}
               </p>
             </section>
           )}
@@ -91,8 +91,8 @@ export default function ItemDetailsPage() {
             <div className={styles.detailBadges}>
               <Badge type={item.type} />
               {item.returned && <Badge type={item.type} returned />}
-              <span className={styles.reportId}>
-                REPORT #{String(item.id).padStart(3, "0")}
+              <span className={styles.itemId}>
+                ITEM #{String(item.id).padStart(3, "0")}
               </span>
             </div>
             <span className="eyebrow">{item.category}</span>
@@ -146,7 +146,7 @@ export default function ItemDetailsPage() {
                 <p>
                   {item.contactEmail
                     ? "Reach out with a detail only the owner would know."
-                    : "No contact email was provided for this report."}
+                    : "No contact email was provided for this item."}
                 </p>
                 {item.contactEmail && (
                   <a href={`mailto:${item.contactEmail}`}>
@@ -159,7 +159,7 @@ export default function ItemDetailsPage() {
             <div className="notice">
               <ShieldCheck size={19} />
               <p>
-                Reports and photos are shared by the community. FindIt doesn’t
+                Items and photos are shared by the community. FindIt doesn’t
                 verify ownership or arrange returns. Avoid sharing sensitive
                 personal information.
               </p>
@@ -167,11 +167,11 @@ export default function ItemDetailsPage() {
             <div className={styles.detailActions}>
               <Button to={`/items/${item.id}/edit`} variant="secondary">
                 <Pencil size={15} />
-                Edit report
+                Edit item
               </Button>
               <Button to={`/items/${item.id}/delete`} variant="quiet">
                 <Trash2 size={14} />
-                Delete report
+                Delete item
               </Button>
             </div>
             <p className={styles.demoNote}>

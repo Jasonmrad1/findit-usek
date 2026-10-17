@@ -1,17 +1,17 @@
 import * as itemRepository from "../db/itemRepository.js";
-import * as itemReport from "../../../shared/itemReport.js";
+import * as itemValidation from "../../../shared/itemValidation.js";
 import { ApiError } from "../errors/ApiError.js";
 
 function parseId(value) {
   const id = Number(value);
   if (!/^[1-9]\d*$/.test(String(value)) || !Number.isSafeInteger(id)) {
-    throw new ApiError(400, "Enter a valid report ID.");
+    throw new ApiError(400, "Enter a valid item ID.");
   }
   return id;
 }
 
 function validate(values, creating = false) {
-  const result = itemReport.validateReport(values, { creating });
+  const result = itemValidation.validateItem(values, { creating });
   if (!result.valid) {
     throw new ApiError(
       400,
@@ -28,7 +28,7 @@ export function listItems(store) {
 
 export function getItem(store, id) {
   const item = itemRepository.findById(store, parseId(id));
-  if (!item) throw new ApiError(404, "Report not found.");
+  if (!item) throw new ApiError(404, "Item not found.");
   return item;
 }
 

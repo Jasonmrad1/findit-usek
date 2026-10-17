@@ -33,7 +33,7 @@ export default function ItemsPage() {
         action={
           <Button to="/items/new">
             <Plus size={17} />
-            Report an item
+            Add an item
           </Button>
         }
       >
@@ -52,7 +52,7 @@ export default function ItemsPage() {
         </p>
         <label>
           <ArrowDownUp size={13} aria-hidden="true" />
-          <span className="sr-only">Sort reports</span>
+          <span className="sr-only">Sort items</span>
           <select
             value={filters.sort || "newest"}
             onChange={(event) => change("sort", event.target.value)}
@@ -81,8 +81,8 @@ export default function ItemsPage() {
       <div className={`notice ${styles.listNotice}`}>
         <Info size={17} />
         <p>
-          Recognize an item? Open the report for details and any contact
-          information. Reports are shared by the community and aren’t verified.
+          Recognize an item? Open the item for details and any contact
+          information. Items are shared by the community and aren’t verified.
         </p>
       </div>
     </div>

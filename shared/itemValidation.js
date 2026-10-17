@@ -53,7 +53,7 @@ export function isImageUrl(value) {
   }
 }
 
-export const emptyReport = () => ({
+export const emptyItem = () => ({
   title: "",
   description: "",
   category: "",
@@ -66,7 +66,7 @@ export const emptyReport = () => ({
   locationImageUrl: "",
 });
 
-export function validateReport(input, { creating = false } = {}) {
+export function validateItem(input, { creating = false } = {}) {
   const errors = {};
   const value = {};
   const source =

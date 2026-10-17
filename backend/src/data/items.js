@@ -176,9 +176,9 @@ const records = [
 ];
 
 export function createSeedItems() {
-  return records.map(({ photoId, placeId, ...report }, index) => ({
+  return records.map(({ photoId, placeId, ...item }, index) => ({
     id: index + 1,
-    ...report,
+    ...item,
     contactEmail: `student${index + 1}@example.com`,
     imageUrl: photoUrl(photoId),
     locationImageUrl: photoUrl(placeId),

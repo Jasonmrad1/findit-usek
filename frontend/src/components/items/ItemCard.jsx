@@ -39,7 +39,7 @@ export default function ItemCard({ item }) {
               {formatDate(item.date)}
             </span>
             <span>
-              View report <span aria-hidden="true">→</span>
+              View item <span aria-hidden="true">→</span>
             </span>
           </div>
         </div>

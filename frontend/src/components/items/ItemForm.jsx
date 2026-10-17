@@ -12,9 +12,9 @@ import {
   CATEGORIES,
   LOCATIONS,
   TYPES,
-  validateReport,
+  validateItem,
   isImageUrl,
-} from "../../../../shared/itemReport.js";
+} from "../../../../shared/itemValidation.js";
 import { Button, Field, ErrorSummary } from "../common/UI.jsx";
 import ItemPhoto from "./ItemPhoto.jsx";
 import styles from "./Form.module.css";
@@ -61,7 +61,7 @@ export default function ItemForm({
   const [serverErrors, setServerErrors] = useState({});
   const summaryRef = useRef(null);
   const lock = useRef(false);
-  const result = validateReport(values);
+  const result = validateItem(values);
   const errors = {
     ...Object.fromEntries(
       Object.entries(result.errors).filter(
@@ -124,7 +124,7 @@ export default function ItemForm({
         </div>
         <fieldset className={styles.typeField}>
           <legend>
-            I’m reporting something… <span>*</span>
+            I’m adding something… <span>*</span>
           </legend>
           <div>
             {TYPES.map((type) => (
@@ -273,7 +273,7 @@ export default function ItemForm({
           type="email"
           placeholder="you@example.com"
           maxLength={254}
-          hint="This address will be public. Without an email, the report has no contact method."
+          hint="This address will be public. Without an email, the item has no contact method."
           {...field("contactEmail")}
         />
         {mode === "edit" && (
@@ -289,7 +289,7 @@ export default function ItemForm({
               }
             />
             <span>
-              <strong>Item returned / report resolved</strong>
+              <strong>Item returned</strong>
               <small>
                 Let the community know this story has a happy ending.
               </small>
@@ -315,10 +315,10 @@ export default function ItemForm({
         </Button>
         <Button type="submit" pending={pending}>
           {pending
-            ? "Saving report…"
+            ? "Saving item…"
             : mode === "edit"
               ? "Save changes"
-              : "Publish report"}
+              : "Publish item"}
           {!pending && <ArrowRight size={16} />}
         </Button>
       </div>

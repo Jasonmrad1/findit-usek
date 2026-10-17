@@ -31,7 +31,7 @@ export default function DeleteItemPage() {
       await dispatch(deleteItem(id)).unwrap();
       navigate("/items", {
         state: {
-          feedback: "The report has been deleted from the noticeboard.",
+          feedback: "The item has been deleted from the noticeboard.",
         },
       });
     } catch (failure) {
@@ -42,16 +42,16 @@ export default function DeleteItemPage() {
   }
   return (
     <div className="container page">
-      <Breadcrumb current="Delete report" />
+      <Breadcrumb current="Delete item" />
       {status === "idle" || status === "loading" ? (
         <LoadingSkeleton detail />
       ) : error || !item ? (
         <>
-          <h1 tabIndex={-1}>Report unavailable</h1>
+          <h1 tabIndex={-1}>Item unavailable</h1>
           <ErrorState
             message={
               error?.status === 404
-                ? "This report has already been removed or no longer exists."
+                ? "This item has already been removed or no longer exists."
                 : error?.message
             }
             missing={error?.status === 404}
@@ -63,9 +63,9 @@ export default function DeleteItemPage() {
           <span className={styles.deleteIcon}>
             <Trash2 size={27} />
           </span>
-          <h1 tabIndex={-1}>Remove this report?</h1>
+          <h1 tabIndex={-1}>Remove this item?</h1>
           <p>
-            This will remove the report from the campus noticeboard.
+            This will remove the item from the campus noticeboard.
             <br />
             This action can’t be undone during this server session.
           </p>
@@ -88,13 +88,13 @@ export default function DeleteItemPage() {
           <div className={`notice ${styles.deleteNotice}`}>
             <AlertTriangle size={17} />
             <p>
-              If the item has been returned, you can mark the report as resolved
+              If the item has been returned, you can mark it as returned
               by editing it instead.
             </p>
           </div>
           <div className="button-row">
             <Button to={`/items/${id}`} variant="secondary">
-              Keep report
+              Keep item
             </Button>
             <Button
               variant="danger"
@@ -103,7 +103,7 @@ export default function DeleteItemPage() {
             >
               {mutation.status === "loading"
                 ? "Removing…"
-                : "Yes, delete report"}
+                : "Yes, delete item"}
             </Button>
           </div>
         </section>

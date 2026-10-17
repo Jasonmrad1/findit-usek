@@ -27,19 +27,19 @@ Run `npm run dev`, connect your phone and computer to the same Wi-Fi, and open t
 
 ## What is included
 
-- Fourteen fictional lost/found reports, including two returned reports.
-- Home with live counters and recent reports; Explore with text search, combined filters, URL state, and date sorting.
+- Fourteen fictional lost/found items, including two returned items.
+- Home with live counters and recent items; Explore with text search, combined filters, URL state, and date sorting.
 - Item details; shared validated Create/Edit form; dedicated Delete confirmation.
 - Optional public email; item and location photo URLs with previews and safe fallbacks.
 - About and a validated **local demonstration** Contact form.
 - Poppins fonts bundled locally, user-supplied USEK photos and logo, real stock item and location photography, responsive navy/blue styling, semantic controls and keyboard focus handling.
-- Loading, empty, no-results, error, retry, missing-report and unknown-route states.
+- Loading, empty, no-results, error, retry, missing-item and unknown-route states.
 
 ## Routes and academic checklist
 
 | Required view | Route | Operation |
 |---|---|---|
-| Home | `/` | Collection GET for live counts/recent reports |
+| Home | `/` | Collection GET for live counts/recent items |
 | About Us | `/about` | Purpose and prototype limitations |
 | Contact Us | `/contact` | Event handling, local validation and honest demo confirmation |
 | Display all | `/items` | `GET /items` |
@@ -52,7 +52,7 @@ Backend (20 points): Express server, one entity type, in-memory array, all five 
 
 ## Architecture
 
-The visual refinement uses the supplied campus panorama for the homepage hero and the courtyard photograph for the community story, About, and Contact. The header/footer use the provided USEK logo alongside the service name; there is no custom application icon. Homepage search opens the existing Explore view with its query in the URL. The Explore card/filter layout and report breadcrumbs retain their established behavior. See `ASSET_CREDITS.md` for the supplied file mapping.
+The visual refinement uses the supplied campus panorama for the homepage hero and the courtyard photograph for the community story, About, and Contact. The header/footer use the provided USEK logo alongside the service name; there is no custom application icon. Homepage search opens the existing Explore view with its query in the URL. The Explore card/filter layout and item breadcrumbs retain their established behavior. See `ASSET_CREDITS.md` for the supplied file mapping.
 
 ```text
 frontend/src/
@@ -64,10 +64,10 @@ frontend/src/
 backend/src/
   app.js            Composes middleware and per-app dependencies
   server.js         Starts the local HTTP server
-  data/             Fictional seed reports
+  data/             Fictional seed items
   routes/           Five item REST endpoints
   controllers/      HTTP requests, responses and status codes
-  services/         Report validation, ID checks and not-found handling
+  services/         Item validation, ID checks and not-found handling
   db/               In-memory repository, CRUD storage and ID generation
   middleware/       Centralized API error responses
   errors/           Structured service errors
@@ -81,15 +81,15 @@ e2e/                Real API browser acceptance tests
 2. The central fetch service sends an HTTP request to Express.
 3. Express validates and reads/changes its array, returning JSON.
 4. Fulfilled reducers reconcile the returned object with canonical Redux entities.
-5. Selectors derive counts, recent reports and filtered lists. Components receive reports through props.
+5. Selectors derive counts, recent items and filtered lists. Components receive items through props.
 
 Form values, errors, previews, menu state and Contact feedback belong in local React state. Explore filters belong in URL search parameters. Reads track request IDs; successful mutations advance a revision so earlier reads cannot overwrite saved changes. A partial detail cache never supplies complete collection statistics. No localStorage is used.
 
-Backend flow: routes ? controllers ? services ? repository. The service validates report input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns the array and monotonic IDs, returns copies, and is created per application instance. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
+Backend flow: routes ? controllers ? services ? repository. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns the array and monotonic IDs, returns copies, and is created per application instance. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
 
-## ItemReport and API
+## Item and API
 
-An ItemReport has **11 properties**: numeric immutable `id`; strings `title`, `description`, `category`, `type`, `location`, `date`, `contactEmail`, `imageUrl`, `locationImageUrl`; and boolean `returned`. Open/Returned is derived from that one boolean.
+An Item has **11 properties**: numeric immutable `id`; strings `title`, `description`, `category`, `type`, `location`, `date`, `contactEmail`, `imageUrl`, `locationImageUrl`; and boolean `returned`. Open/Returned is derived from that one boolean.
 
 Title: 3–100 characters; description: 10–2000; location: 2–120; category/type: allowed enums; date: real `YYYY-MM-DD` calendar date. Email and both photos are optional strings. Email is syntax-validated, not ownership-verified. Image values allow absolute HTTP(S) URLs or project-local `/images/…` paths. These fields reference images and never upload files. Dates are displayed as calendar dates without timezone shifting.
 
@@ -106,7 +106,7 @@ POST defaults omitted optional strings to `""` and omitted `returned` to `false`
 Example request, usable in PowerShell:
 
 ```powershell
-$report = @{
+$item = @{
   title = 'Blue lecture notebook'
   description = 'A blue notebook with a silver sticker on the front cover.'
   category = 'Books'
@@ -119,7 +119,7 @@ $report = @{
   locationImageUrl = ''
 } | ConvertTo-Json
 
-$created = Invoke-RestMethod http://localhost:3001/items -Method Post -ContentType 'application/json' -Body $report
+$created = Invoke-RestMethod http://localhost:3001/items -Method Post -ContentType 'application/json' -Body $item
 Invoke-RestMethod "http://localhost:3001/items/$($created.id)"
 ```
 
@@ -134,9 +134,9 @@ Automated test suites and their dependencies have been removed from this project
 
 ## Demonstration and course defense
 
-1. Open Home and explain that counts derive from fetched reports, not hardcoded numbers.
-2. Explore, search for earbuds, apply filters, and open a report. Show the HTTP GET in browser developer tools.
-3. Create a report with optional photos/email, edit it, and mark it returned. Show POST/PUT and Redux state changes.
+1. Open Home and explain that counts derive from fetched items, not hardcoded numbers.
+2. Explore, search for earbuds, apply filters, and open an item. Show the HTTP GET in browser developer tools.
+3. Create an item with optional photos/email, edit it, and mark it returned. Show POST/PUT and Redux state changes.
 4. Open the dedicated delete page, cancel once, then confirm deletion. Show DELETE and the updated list.
 5. Submit Contact with empty fields, then valid values. Explain that validation is local and **no email is sent**.
 6. Explain component props (`ItemCard`), local state (`ItemForm`), centralized state (items slice), routing, and shared pure validation.
@@ -144,11 +144,11 @@ Automated test suites and their dependencies have been removed from this project
 
 ## Honest prototype limitations
 
-- Reports reset on backend restart. There is no database or persistence.
-- There are no accounts or authorization; anyone with access can edit/delete reports.
-- Contact validates locally and sends/stores nothing. Optional public report email is the only contact method.
-- Reports, photos and ownership claims are unverified. Never publish personal ID photos or sensitive identifiers.
-- Seed reports use real Pexels stock photos, including location reference photos; they do not depict verified USEK reports or finding locations. See `ASSET_CREDITS.md`. External photo URLs work but may expire, fail or cause requests to third-party hosts.
+- Items reset on backend restart. There is no database or persistence.
+- There are no accounts or authorization; anyone with access can edit/delete items.
+- Contact validates locally and sends/stores nothing. Optional public item email is the only contact method.
+- Items, photos and ownership claims are unverified. Never publish personal ID photos or sensitive identifiers.
+- Seed items use real Pexels stock photos, including location reference photos; they do not depict verified USEK items or finding locations. See `ASSET_CREDITS.md`. External photo URLs work but may expire, fail or cause requests to third-party hosts.
 - Seed emails use reserved `example.com` addresses and do not represent real students.
 - Styling is MyUSEK-inspired, not an official brand specification or endorsement.
 - No deployment, messaging, uploads, claims verification, maps, or matching service is included.

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { Check, Lightbulb } from "lucide-react";
-import { emptyReport } from "../../../shared/itemReport.js";
+import { emptyItem } from "../../../shared/itemValidation.js";
 import {
   Breadcrumb,
   PageIntro,
@@ -80,8 +80,8 @@ function FormContent({ item, mode }) {
       state: {
         feedback:
           mode === "edit"
-            ? "Your report has been updated."
-            : "Your report is on the noticeboard. Thank you for sharing.",
+            ? "Your item has been updated."
+            : "Your item is on the noticeboard. Thank you for sharing.",
       },
     });
   }
@@ -89,7 +89,7 @@ function FormContent({ item, mode }) {
     <div className={styles.formLayout}>
       <ItemForm
         key={item?.id || "new"}
-        initialValues={item || emptyReport()}
+        initialValues={item || emptyItem()}
         mode={mode}
         onSubmit={submit}
         pending={mutation.status === "loading"}
@@ -115,12 +115,12 @@ function EditContent({ id }) {
   return <FormContent item={item} mode="edit" />;
 }
 
-export default function ReportFormPage({ mode = "create" }) {
+export default function ItemFormPage({ mode = "create" }) {
   const { id } = useParams();
   return (
     <div className="container page">
       <Breadcrumb
-        current={mode === "edit" ? "Edit report" : "Report an item"}
+        current={mode === "edit" ? "Edit item" : "Add an item"}
       />
       <PageIntro
         eyebrow="A LITTLE HELP STARTS HERE"

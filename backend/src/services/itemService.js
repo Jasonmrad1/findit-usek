@@ -1,5 +1,5 @@
-import { findAll, findById, insert, replace, remove } from "../db/itemRepository.js";
-import { validateReport } from "../../../shared/itemReport.js";
+import * as itemRepository from "../db/itemRepository.js";
+import * as itemReport from "../../../shared/itemReport.js";
 import { ApiError } from "../errors/ApiError.js";
 
 function parseId(value) {
@@ -11,7 +11,7 @@ function parseId(value) {
 }
 
 function validate(values, creating = false) {
-  const result = validateReport(values, { creating });
+  const result = itemReport.validateReport(values, { creating });
   if (!result.valid) {
     throw new ApiError(
       400,
@@ -23,25 +23,25 @@ function validate(values, creating = false) {
 }
 
 export function listItems(store) {
-  return findAll(store);
+  return itemRepository.findAll(store);
 }
 
 export function getItem(store, id) {
-  const item = findById(store, parseId(id));
+  const item = itemRepository.findById(store, parseId(id));
   if (!item) throw new ApiError(404, "Report not found.");
   return item;
 }
 
 export function createItem(store, values) {
-  return insert(store, validate(values, true));
+  return itemRepository.insert(store, validate(values, true));
 }
 
 export function updateItem(store, id, values) {
   const existing = getItem(store, id);
-  return replace(store, existing.id, validate(values));
+  return itemRepository.replace(store, existing.id, validate(values));
 }
 
 export function removeItem(store, id) {
   const existing = getItem(store, id);
-  remove(store, existing.id);
+  itemRepository.remove(store, existing.id);
 }

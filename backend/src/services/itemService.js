@@ -21,24 +21,26 @@ function validate(values, creating = false) {
   return result.value;
 }
 
-export function createItemService(repository) {
-  function requireItem(value) {
-    const item = repository.findById(parseId(value));
-    if (!item) throw new ApiError(404, "Report not found.");
-    return item;
-  }
+export function listItems(repository) {
+  return repository.findAll();
+}
 
-  return {
-    list: () => repository.findAll(),
-    get: requireItem,
-    create: (values) => repository.insert(validate(values, true)),
-    update(value, values) {
-      const existing = requireItem(value);
-      return repository.replace(existing.id, validate(values));
-    },
-    remove(value) {
-      const existing = requireItem(value);
-      repository.remove(existing.id);
-    },
-  };
+export function getItem(repository, id) {
+  const item = repository.findById(parseId(id));
+  if (!item) throw new ApiError(404, "Report not found.");
+  return item;
+}
+
+export function createItem(repository, values) {
+  return repository.insert(validate(values, true));
+}
+
+export function updateItem(repository, id, values) {
+  const existing = getItem(repository, id);
+  return repository.replace(existing.id, validate(values));
+}
+
+export function removeItem(repository, id) {
+  const existing = getItem(repository, id);
+  repository.remove(existing.id);
 }

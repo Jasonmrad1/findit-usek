@@ -48,7 +48,27 @@ Run `npm run dev`, connect your phone and computer to the same Wi-Fi, and open t
 | Update existing | `/items/:id/edit` | GET + `PUT /items/:id` |
 | Delete existing | `/items/:id/delete` | GET + deliberate `DELETE /items/:id` |
 
-Backend (20 points): Express server, one entity type, in-memory array, all five REST routes, more than five properties using number/string/boolean, no database/auth/business workflow. Frontend (80 points): React SPA, reusable components/props/state, responsive UI/UX, Contact validation/event handling, actual API requests, React Router and centralized Redux state. The PDF lists learning outcomes 1, 4, 5 without further definitions. See `IMPLEMENTATION_PLAN.md` for the full requirement mapping.
+### Assignment requirements
+
+Checked against both pages of the CSC457 Project 1 assignment before removing the unused source documents. Backend is worth 20 points; frontend is worth 80 points.
+
+| PDF requirement | Implementation |
+|---|---|
+| Node.js/Express Web API | `backend/src/server.js` |
+| One entity type with an in-memory dataset | Items in `backend/src/db/itemRepository.js`; 14 demo items reset on restart |
+| Read all, read one, create, update and delete through HTTP | GET `/items`, GET `/items/:id`, POST `/items`, PUT `/items/:id`, DELETE `/items/:id` |
+| At least five properties with different data types | 11 properties, including numeric `id`, string fields and boolean `returned` |
+| Bare-bones CRUD without database, authentication, authorization or business workflows | In-memory array, CRUD handlers and input validation only |
+| React SPA connected to the backend | React pages call the API through `itemsApi.js` and Redux async actions |
+| All eight required views | Home, About, Contact, list, details, create, edit and delete; routes listed above |
+| Effective use of components, props and state | Shared `ItemCard`, `ItemForm` and UI components; props and local React state |
+| UI/UX emphasis | Responsive layouts, images, keyboard navigation, loading/error feedback and form validation |
+| Contact form with event handling and input validation | Controlled fields, `onSubmit`, `validateContact()` and local confirmation |
+| Entity views send HTTP requests for CRUD | All five operations use the Express API; the frontend updates Redux from responses |
+| React Router for client-side navigation | `BrowserRouter`, `Routes`, `Route`, `Link` and `NavLink` |
+| Redux for centralized application state | Redux Toolkit store and item slice, connected with React-Redux |
+
+The PDF lists learning outcomes 1, 4 and 5 without defining them. The original assignment remains available in Git history.
 
 ## Architecture
 
@@ -71,7 +91,6 @@ backend/src/
   middleware/       Centralized API error responses
   errors/           Structured service errors
 shared/             Pure model constants and validation
-e2e/                Real API browser acceptance tests
 ```
 
 ### State and data flow
@@ -84,7 +103,7 @@ e2e/                Real API browser acceptance tests
 
 Form values, errors, previews, menu state and Contact feedback belong in local React state. Explore filters belong in URL search parameters. Redux keeps a plain item array, one selected item, and loading/error states for fetching and saving. Collection pages fetch the full list; detail pages fetch one item by ID. No localStorage is used.
 
-Backend flow: routes ? controllers ? services ? repository. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns one shared in-memory array and monotonic ID counter per server process, and returns copies. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
+Backend flow: `routes -> controllers -> services -> repository`. The service validates item input and resolves missing/invalid IDs; the controller only translates HTTP requests and responses. The repository owns one shared in-memory array and monotonic ID counter per server process, and returns copies. Seed fixtures stay in `data/`. Express error middleware preserves structured validation errors and handles malformed JSON. Storage remains in memory as required by the assignment; this is not a persistent database.
 
 ### Backend request flow
 
@@ -136,7 +155,7 @@ $item = @{
   date = '2026-10-15'
   returned = $false
   contactEmail = ''
-  imageUrl = '/images/notebook.svg'
+  imageUrl = 'https://images.pexels.com/photos/5905437/pexels-photo-5905437.jpeg'
   locationImageUrl = ''
 } | ConvertTo-Json
 

@@ -67,7 +67,7 @@ export default function DeleteItemPage() {
           <p>
             This will remove the item from the campus noticeboard.
             <br />
-            This action can’t be undone during this server session.
+            This action can't be undone during this server session.
           </p>
           <div className={styles.deletePreview}>
             <ItemPhoto

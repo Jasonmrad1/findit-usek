@@ -188,8 +188,26 @@
   }
   .expanded {
     display: flex;
+    transform-origin: top;
+    animation: expandFilters 220ms ease-out;
   }
   .reset {
     margin-left: auto;
+  }
+}
+
+@keyframes expandFilters {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scaleY(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .expanded {
+    animation: none;
   }
 }

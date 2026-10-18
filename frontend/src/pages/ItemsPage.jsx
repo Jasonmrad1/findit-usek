@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useSearchParams } from "react-router";
 import { Plus, ArrowDownUp, Info } from "lucide-react";
 import {
@@ -9,11 +10,13 @@ import {
 } from "../components/common/UI.jsx";
 import ItemCard from "../components/items/ItemCard.jsx";
 import ItemFilters from "../components/items/ItemFilters.jsx";
+import FilterSelect from "../components/items/FilterSelect.jsx";
 import { useCollection } from "../features/items/useItems.js";
 import { filterItems } from "../features/items/itemsSelectors.js";
 import styles from "./Pages.module.css";
 
 export default function ItemsPage() {
+  usePageTitle("Explore items");
   const { items, status, error, retry } = useCollection();
   const loaded = status === "succeeded";
   const [params, setParams] = useSearchParams();
@@ -50,17 +53,17 @@ export default function ItemsPage() {
           <strong>{loaded ? filtered.length : "—"}</strong>{" "}
           {filtered.length === 1 ? "item" : "items"} on the noticeboard
         </p>
-        <label>
-          <ArrowDownUp size={13} aria-hidden="true" />
-          <span className="sr-only">Sort items</span>
-          <select
-            value={filters.sort || "newest"}
-            onChange={(event) => change("sort", event.target.value)}
-          >
-            <option value="newest">Newest first</option>
-            <option value="oldest">Oldest first</option>
-          </select>
-        </label>
+        <FilterSelect
+          label="Sort items"
+          icon={<ArrowDownUp size={14} aria-hidden="true" />}
+          value={filters.sort || "newest"}
+          options={[
+            { value: "newest", label: "Newest first" },
+            { value: "oldest", label: "Oldest first" },
+          ]}
+          onChange={(value) => change("sort", value)}
+          compact
+        />
       </div>
       {status === "loading" || status === "idle" ? (
         <LoadingSkeleton />

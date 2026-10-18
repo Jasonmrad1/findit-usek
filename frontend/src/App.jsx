@@ -11,8 +11,6 @@ function RouteEffects() {
   useEffect(() => {
     window.scrollTo(0, 0);
     document.getElementById("main").focus({ preventScroll: true });
-    const heading = document.querySelector("main h1");
-    document.title = heading ? heading.textContent + " | FindIt USEK" : "FindIt USEK";
   }, [pathname]);
 
   return null;

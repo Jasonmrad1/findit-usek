@@ -1,8 +1,10 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { ArrowUpRight, ArrowRight, MapPin, HandHeart } from "lucide-react";
 import { Button } from "../components/common/UI.jsx";
 import styles from "./About.module.css";
 
 export default function AboutPage() {
+  usePageTitle("About");
   return (
     <div className="container page">
       <header className={styles.intro}>

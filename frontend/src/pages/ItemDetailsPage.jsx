@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useParams } from "react-router";
 import {
   CalendarDays,
@@ -25,6 +26,7 @@ import styles from "./Pages.module.css";
 export default function ItemDetailsPage() {
   const { id } = useParams();
   const { item, status, error, retry } = useItem(id);
+  usePageTitle(error ? "Item unavailable" : item?.title || "Item details");
   if (status === "idle" || status === "loading")
     return (
       <div className="container page">

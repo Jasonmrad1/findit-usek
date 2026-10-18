@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Mail } from "lucide-react";
@@ -11,6 +12,7 @@ import {
 import styles from "./Pages.module.css";
 
 export default function ContactPage() {
+  usePageTitle("Contact");
   const [values, setValues] = useState({
     name: "",
     email: "",

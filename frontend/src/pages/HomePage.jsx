@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -14,6 +15,7 @@ import { selectRecent, selectStats } from "../features/items/itemsSelectors.js";
 import styles from "./Home.module.css";
 
 export default function HomePage() {
+  usePageTitle("Home");
   const { status, error, retry } = useCollection();
   const loaded = status === "succeeded";
   const recent = useSelector(selectRecent);

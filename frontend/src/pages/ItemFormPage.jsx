@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
@@ -116,6 +117,7 @@ function EditContent({ id }) {
 }
 
 export default function ItemFormPage({ mode = "create" }) {
+  usePageTitle(mode === "edit" ? "Edit item" : "Add an item");
   const { id } = useParams();
   return (
     <div className="container page">

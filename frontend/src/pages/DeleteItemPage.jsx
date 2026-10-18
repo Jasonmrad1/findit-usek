@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
@@ -17,6 +18,9 @@ import styles from "./Pages.module.css";
 export default function DeleteItemPage() {
   const { id } = useParams();
   const { item, status, error, retry } = useItem(id);
+  usePageTitle(
+    error ? "Item unavailable" : item ? "Delete " + item.title : "Delete item",
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const mutation = useSelector((state) => state.items.mutation);

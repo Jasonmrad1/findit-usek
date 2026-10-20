@@ -1,8 +1,10 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { ArrowUpRight, ArrowRight, MapPin, HandHeart } from "lucide-react";
 import { Button } from "../components/common/UI.jsx";
 import styles from "./About.module.css";
 
 export default function AboutPage() {
+  usePageTitle("About");
   return (
     <div className="container page">
       <header className={styles.intro}>
@@ -72,7 +74,7 @@ export default function AboutPage() {
             [
               "01",
               "Take a look.",
-              "Browse reports with photos, dates, and campus locations. Recognize something? Open its story.",
+              "Browse items with photos, dates, and campus locations. Recognize something? Open its story.",
             ],
             [
               "02",
@@ -82,7 +84,7 @@ export default function AboutPage() {
             [
               "03",
               "Reach out.",
-              "Use the email on a report to make contact. The next step is a conversation between you.",
+              "Use the email on an item to make contact. The next step is a conversation between you.",
             ],
           ].map(([number, title, text]) => (
             <article key={number}>
@@ -98,7 +100,7 @@ export default function AboutPage() {
           <span className="eyebrow">MADE FOR OUR CAMPUS COMMUNITY</span>
           <h2>Built here. For the people here.</h2>
           <p>
-            FindIt brings lost and found reports from across campus into one
+            FindIt brings lost and found items from across campus into one
             shared space. Whether you are retracing your steps or helping
             someone else, a familiar place and a few thoughtful details can
             bring you closer to a happy ending.
@@ -128,7 +130,7 @@ export default function AboutPage() {
             Explore items <ArrowUpRight size={17} />
           </Button>
           <Button to="/items/new" variant="quiet">
-            Share a report <ArrowRight size={17} />
+            Share an item <ArrowRight size={17} />
           </Button>
         </div>
       </div>

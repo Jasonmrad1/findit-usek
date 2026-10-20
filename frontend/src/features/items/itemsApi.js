@@ -4,18 +4,16 @@ const baseUrl = (
 
 export async function request(
   path = "",
-  { method = "GET", body, signal } = {},
+  { method = "GET", body } = {},
 ) {
   let response;
   try {
     response = await fetch(`${baseUrl}/items${path}`, {
       method,
-      signal,
       headers: body ? { "Content-Type": "application/json" } : undefined,
       body: body ? JSON.stringify(body) : undefined,
     });
-  } catch (error) {
-    if (error.name === "AbortError") throw error;
+  } catch {
     throw {
       message:
         "We couldn’t reach FindIt. Check that the API is running, then try again.",

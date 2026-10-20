@@ -1,7 +1,8 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useRef, useState } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Mail } from "lucide-react";
-import { validateContact } from "../../../shared/itemReport.js";
+import { validateContact } from "../../../shared/itemValidation.js";
 import {
   Button,
   ErrorSummary,
@@ -11,21 +12,19 @@ import {
 import styles from "./Pages.module.css";
 
 export default function ContactPage() {
+  usePageTitle("Contact");
   const [values, setValues] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
-  const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [success, setSuccess] = useState(false);
   const summaryRef = useRef(null);
   const successRef = useRef(null);
   const allErrors = validateContact(values);
-  const errors = Object.fromEntries(
-    Object.entries(allErrors).filter(([name]) => submitted || touched[name]),
-  );
+  const errors = submitted ? allErrors : {};
   function field(name) {
     return {
       value: values[name],
@@ -34,7 +33,6 @@ export default function ContactPage() {
         setSuccess(false);
         setValues((current) => ({ ...current, [name]: event.target.value }));
       },
-      onBlur: () => setTouched((current) => ({ ...current, [name]: true })),
     };
   }
   function submit(event) {
@@ -82,7 +80,7 @@ export default function ContactPage() {
               <strong>Looking for a lost item?</strong>
               <p>
                 Explore the noticeboard and contact the email on an individual
-                report.
+                item.
               </p>
               <Link className="text-link" to="/items">
                 Explore items <ArrowRight size={14} />

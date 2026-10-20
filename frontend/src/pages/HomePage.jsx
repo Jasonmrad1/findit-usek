@@ -1,3 +1,4 @@
+import usePageTitle from "../app/usePageTitle.js";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -14,7 +15,9 @@ import { selectRecent, selectStats } from "../features/items/itemsSelectors.js";
 import styles from "./Home.module.css";
 
 export default function HomePage() {
-  const { status, error, complete, retry } = useCollection();
+  usePageTitle("Home");
+  const { status, error, retry } = useCollection();
+  const loaded = status === "succeeded";
   const recent = useSelector(selectRecent);
   const stats = useSelector(selectStats);
   const [query, setQuery] = useState("");
@@ -57,13 +60,13 @@ export default function HomePage() {
               </Button>
               <Button to="/items/new" variant="secondary">
                 <Plus size={17} />
-                Report an item
+                Add an item
               </Button>
             </div>
             <form onSubmit={search} className={styles.heroSearch} role="search">
               <Search size={21} aria-hidden="true" />
               <label className="sr-only" htmlFor="campus-search">
-                Search campus reports
+                Search campus items
               </label>
               <input
                 id="campus-search"
@@ -72,7 +75,7 @@ export default function HomePage() {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
-              <button type="submit" aria-label="Find matching reports">
+              <button type="submit" aria-label="Find matching items">
                 <ArrowRight size={20} />
               </button>
             </form>
@@ -100,7 +103,7 @@ export default function HomePage() {
       </section>
       <section
         className={styles.statsSection}
-        aria-label="Campus report statistics"
+        aria-label="Campus item statistics"
       >
         <div className={`container ${styles.statsBar}`}>
           <div className={styles.statsIntro}>
@@ -110,13 +113,13 @@ export default function HomePage() {
           <div className={styles.stats}>
             {[
               ["total", "Items shared"],
-              ["lost", "Reported lost"],
-              ["found", "Reported found"],
+              ["lost", "Lost items"],
+              ["found", "Found items"],
               ["returned", "Marked returned"],
             ].map(([key, label]) => (
               <div key={key}>
                 <strong>
-                  {complete ? String(stats[key]).padStart(2, "0") : "—"}
+                  {loaded ? String(stats[key]).padStart(2, "0") : "—"}
                 </strong>
                 <span>{label}</span>
               </div>
@@ -135,13 +138,13 @@ export default function HomePage() {
               Familiar things.
               <br className={styles.mobileBreak} /> Waiting to be found.
             </h2>
-            <p>The latest lost and found reports from around campus.</p>
+            <p>The latest lost and found items from around campus.</p>
           </div>
           <Link className="text-link" to="/items">
             Explore all items <ArrowUpRight size={18} />
           </Link>
         </div>
-        {(status === "loading" && !complete) || status === "idle" ? (
+        {status === "loading" || status === "idle" ? (
           <LoadingSkeleton />
         ) : error ? (
           <ErrorState message={error.message} onRetry={retry} />
@@ -227,12 +230,12 @@ export default function HomePage() {
               "Share the details.",
               "A clear description. A campus location. A photo if you have one. That’s all it takes to start.",
               "/items/new",
-              "Create a report",
+              "Create an item",
             ],
             [
               "03",
               "Make a connection.",
-              "Recognize something? Open the report and use its contact email to reach out.",
+              "Recognize something? Open the item and use its contact email to reach out.",
               "/items?type=Found",
               "See what’s been found",
             ],
@@ -272,7 +275,7 @@ export default function HomePage() {
               One less thing on someone’s mind.
             </p>
             <Button to="/items/new">
-              Report an item <ArrowUpRight size={18} />
+              Add an item <ArrowUpRight size={18} />
             </Button>
           </div>
         </div>

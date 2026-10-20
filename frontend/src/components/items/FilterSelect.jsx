@@ -8,6 +8,7 @@ export default function FilterSelect({
   value,
   options,
   onChange,
+  compact = false,
 }) {
   const id = useId();
   const root = useRef(null);
@@ -94,7 +95,7 @@ export default function FilterSelect({
 
   return (
     <div
-      className={styles.root}
+      className={`${styles.root} ${compact ? styles.compact : ""}`}
       ref={root}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
@@ -120,31 +121,31 @@ export default function FilterSelect({
         <span>{options[selected].label}</span>
         <ChevronDown size={14} aria-hidden="true" />
       </button>
-      {open && (
-        <div
-          id={`${id}-options`}
-          role="listbox"
-          aria-label={label}
-          className={styles.options}
-        >
-          {options.map((option, index) => (
-            <div
-              id={`${id}-${index}`}
-              key={option.value}
-              role="option"
-              title={option.label}
-              aria-selected={value === option.value}
-              className={`${styles.option} ${active === index ? styles.active : ""}`}
-              onPointerMove={() => setActive(index)}
-              onPointerDown={(event) => event.preventDefault()}
-              onClick={() => choose(index)}
-            >
-              <span>{option.label}</span>
-              {value === option.value && <Check size={15} aria-hidden="true" />}
-            </div>
-          ))}
-        </div>
-      )}
+      <div
+        id={`${id}-options`}
+        role="listbox"
+        aria-label={label}
+        className={`${styles.options} ${open ? styles.open : ""}`}
+        aria-hidden={!open}
+        inert={!open}
+      >
+        {options.map((option, index) => (
+          <div
+            id={`${id}-${index}`}
+            key={option.value}
+            role="option"
+            title={option.label}
+            aria-selected={value === option.value}
+            className={`${styles.option} ${active === index ? styles.active : ""}`}
+            onPointerMove={() => setActive(index)}
+            onPointerDown={(event) => event.preventDefault()}
+            onClick={() => choose(index)}
+          >
+            <span>{option.label}</span>
+            {value === option.value && <Check size={15} aria-hidden="true" />}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -6,28 +6,13 @@ import SiteFooter from "./components/layout/SiteFooter.jsx";
 import AppRoutes from "./app/router.jsx";
 
 function RouteEffects() {
-  const location = useLocation();
+  const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    function focusHeading() {
-      const heading = document.querySelector("main h1");
-      if (heading) {
-        document.title = `${heading.textContent} | FindIt USEK`;
-        heading.focus({ preventScroll: true });
-        observer.disconnect();
-      }
-    }
-    const observer = new MutationObserver(focusHeading);
-    observer.observe(document.querySelector("main"), {
-      childList: true,
-      subtree: true,
-    });
-    const frame = requestAnimationFrame(focusHeading);
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
-  }, [location.pathname]);
+    document.getElementById("main").focus({ preventScroll: true });
+  }, [pathname]);
+
   return null;
 }
 

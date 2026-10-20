@@ -14,20 +14,7 @@
   color: var(--navy);
   font-weight: 500;
 }
-.resultsBar label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  color: var(--muted);
-}
-.resultsBar select {
-  border: 0;
-  background: transparent;
-  color: #526279;
-  font-size: 11px;
-  height: 40px;
-  padding-right: 5px;
-}
+
 .listNotice {
   margin-top: 30px;
 }
@@ -47,7 +34,7 @@
   gap: 7px;
   margin-bottom: 24px;
 }
-.reportId {
+.itemId {
   margin-left: auto;
   font-size: 9px;
   letter-spacing: 1px;
@@ -220,7 +207,7 @@
   border-radius: 14px;
   padding: 30px 25px;
   position: sticky;
-  top: 25px;
+  top: 104px;
 }
 .sidebarPhoto {
   margin: -30px -25px 26px;
@@ -585,8 +572,7 @@
   }
 }
 @media (max-width: 639px) {
-  .resultsBar p,
-  .resultsBar select {
+  .resultsBar p {
     font-size: 10px;
   }
   .metadata {

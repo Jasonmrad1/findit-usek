@@ -6,7 +6,7 @@ import {
   Grid2X2,
   CircleCheck,
 } from "lucide-react";
-import { CATEGORIES } from "../../../../shared/itemReport.js";
+import { CATEGORIES } from "../../../../shared/itemValidation.js";
 import FilterSelect from "./FilterSelect.jsx";
 import styles from "./ItemFilters.module.css";
 
@@ -33,7 +33,7 @@ export default function ItemFilters({ filters, onChange, onReset }) {
         )}
       </div>
       <div className={styles.filterMain}>
-        <div className={styles.segments} role="group" aria-label="Report type">
+        <div className={styles.segments} role="group" aria-label="Item type">
           {["", "Lost", "Found"].map((type) => (
             <button
               key={type}

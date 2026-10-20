@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowRight,
   ImagePlus,
@@ -12,23 +12,16 @@ import {
   CATEGORIES,
   LOCATIONS,
   TYPES,
-  validateReport,
+  validateItem,
   isImageUrl,
-} from "../../../../shared/itemReport.js";
+} from "../../../../shared/itemValidation.js";
 import { Button, Field, ErrorSummary } from "../common/UI.jsx";
 import ItemPhoto from "./ItemPhoto.jsx";
 import styles from "./Form.module.css";
 
 function PhotoPreview({ url, label }) {
-  const [preview, setPreview] = useState("");
+  const preview = url && isImageUrl(url) ? url : "";
   const [failed, setFailed] = useState("");
-  useEffect(() => {
-    const timer = setTimeout(
-      () => setPreview(url && isImageUrl(url) ? url : ""),
-      350,
-    );
-    return () => clearTimeout(timer);
-  }, [url]);
   if (!preview) return null;
   return (
     <>
@@ -56,20 +49,11 @@ export default function ItemForm({
   error,
 }) {
   const [values, setValues] = useState(initialValues);
-  const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [serverErrors, setServerErrors] = useState({});
   const summaryRef = useRef(null);
-  const lock = useRef(false);
-  const result = validateReport(values);
-  const errors = {
-    ...Object.fromEntries(
-      Object.entries(result.errors).filter(
-        ([name]) => submitted || touched[name],
-      ),
-    ),
-    ...serverErrors,
-  };
+  const result = validateItem(values);
+  const errors = submitted ? { ...result.errors, ...serverErrors } : {};
   const isFound = values.type === "Found";
   const field = (name) => ({
     value: values[name],
@@ -82,25 +66,21 @@ export default function ItemForm({
         return next;
       });
     },
-    onBlur: () => setTouched((current) => ({ ...current, [name]: true })),
   });
   async function submit(event) {
     event.preventDefault();
-    if (lock.current || pending) return;
+    if (pending) return;
     setSubmitted(true);
     setServerErrors({});
     if (!result.valid) {
       requestAnimationFrame(() => summaryRef.current?.focus());
       return;
     }
-    lock.current = true;
     try {
       await onSubmit(result.value);
     } catch (failure) {
       setServerErrors(failure.errors || {});
       requestAnimationFrame(() => summaryRef.current?.focus());
-    } finally {
-      lock.current = false;
     }
   }
   return (
@@ -124,7 +104,7 @@ export default function ItemForm({
         </div>
         <fieldset className={styles.typeField}>
           <legend>
-            I’m reporting something… <span>*</span>
+            I’m adding something… <span>*</span>
           </legend>
           <div>
             {TYPES.map((type) => (
@@ -273,7 +253,7 @@ export default function ItemForm({
           type="email"
           placeholder="you@example.com"
           maxLength={254}
-          hint="This address will be public. Without an email, the report has no contact method."
+          hint="This address will be public. Without an email, the item has no contact method."
           {...field("contactEmail")}
         />
         {mode === "edit" && (
@@ -289,7 +269,7 @@ export default function ItemForm({
               }
             />
             <span>
-              <strong>Item returned / report resolved</strong>
+              <strong>Item returned</strong>
               <small>
                 Let the community know this story has a happy ending.
               </small>
@@ -315,10 +295,10 @@ export default function ItemForm({
         </Button>
         <Button type="submit" pending={pending}>
           {pending
-            ? "Saving report…"
+            ? "Saving item…"
             : mode === "edit"
               ? "Save changes"
-              : "Publish report"}
+              : "Publish item"}
           {!pending && <ArrowRight size={16} />}
         </Button>
       </div>

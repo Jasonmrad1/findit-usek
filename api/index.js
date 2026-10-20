@@ -1,5 +1,16 @@
-import { createApp } from "../backend/src/app.js";
+import express from "express";
+import cors from "cors";
+import * as itemRouter from "../backend/src/routes/itemRoutes.js";
+import { errorHandler } from "../backend/src/middleware/errorHandler.js";
 
-// Keep the original URL and query string so Express handles /api/items and IDs.
-// One app per warm function instance preserves the existing seeded demo store.
-export default createApp();
+const app = express();
+
+app.use(cors());
+app.use(express.json({ limit: "32kb" }));
+app.use(["/api/items", "/items"], itemRouter.itemRoutes);
+app.all("/{*splat}", (_req, res) =>
+  res.status(404).json({ message: "Endpoint not found." }),
+);
+app.use(errorHandler);
+
+export default app;

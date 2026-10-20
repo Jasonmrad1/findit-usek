@@ -75,7 +75,7 @@ export function ErrorState({ message, onRetry, missing = false }) {
         <AlertCircle size={28} />
       </span>
       <h2>
-        {missing ? "This report isn’t here" : "A little connection trouble"}
+        {missing ? "This item isn’t here" : "A little connection trouble"}
       </h2>
       <p>{message || "We couldn’t load this page. Please try again."}</p>
       <div className="button-row">
@@ -98,15 +98,15 @@ export function EmptyState({ filtered = false, onReset }) {
       </h2>
       <p>
         {filtered
-          ? "Try a different search or clear your filters to see more reports."
-          : "There are no reports yet. Help someone by sharing the first one."}
+          ? "Try a different search or clear your filters to see more items."
+          : "There are no items yet. Help someone by sharing the first one."}
       </p>
       {filtered ? (
         <Button variant="secondary" onClick={onReset}>
           Clear filters
         </Button>
       ) : (
-        <Button to="/items/new">Report an item</Button>
+        <Button to="/items/new">Add an item</Button>
       )}
     </div>
   );
@@ -114,7 +114,7 @@ export function EmptyState({ filtered = false, onReset }) {
 export function LoadingSkeleton({ detail = false }) {
   return (
     <div
-      aria-label="Loading reports"
+      aria-label="Loading items"
       role="status"
       className={detail ? "skeleton-detail" : "item-grid"}
     >

@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router";
 import HomePage from "../pages/HomePage.jsx";
 import ItemsPage from "../pages/ItemsPage.jsx";
 import ItemDetailsPage from "../pages/ItemDetailsPage.jsx";
-import ReportFormPage from "../pages/ReportFormPage.jsx";
+import ItemFormPage from "../pages/ItemFormPage.jsx";
 import DeleteItemPage from "../pages/DeleteItemPage.jsx";
 import AboutPage from "../pages/AboutPage.jsx";
 import ContactPage from "../pages/ContactPage.jsx";
@@ -15,8 +15,8 @@ export default function AppRoutes() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/items" element={<ItemsPage />} />
-      <Route path="/items/new" element={<ReportFormPage />} />
-      <Route path="/items/:id/edit" element={<ReportFormPage mode="edit" />} />
+      <Route path="/items/new" element={<ItemFormPage />} />
+      <Route path="/items/:id/edit" element={<ItemFormPage mode="edit" />} />
       <Route path="/items/:id/delete" element={<DeleteItemPage />} />
       <Route path="/items/:id" element={<ItemDetailsPage />} />
       <Route path="*" element={<NotFoundPage />} />

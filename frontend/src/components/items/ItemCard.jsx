@@ -38,9 +38,7 @@ export default function ItemCard({ item }) {
               <CalendarDays size={12} aria-hidden="true" />
               {formatDate(item.date)}
             </span>
-            <span>
-              View report <span aria-hidden="true">→</span>
-            </span>
+            <span>View item</span>
           </div>
         </div>
       </Link>

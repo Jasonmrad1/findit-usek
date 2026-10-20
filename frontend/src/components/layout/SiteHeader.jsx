@@ -109,11 +109,11 @@ export default function SiteHeader() {
             </NavLink>
           </div>
           <Link
-            className={headerStyles.reportAction}
+            className={headerStyles.itemAction}
             to="/items/new"
             onClick={close}
           >
-            Report an item{" "}
+            Add an item{" "}
             <span>
               <ArrowUpRight size={16} strokeWidth={1.7} aria-hidden="true" />
             </span>

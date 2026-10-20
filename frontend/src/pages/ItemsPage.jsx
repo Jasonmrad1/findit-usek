@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import usePageTitle from "../app/usePageTitle.js";
 import { useSearchParams } from "react-router";
 import { Plus, ArrowDownUp, Info } from "lucide-react";
 import {
@@ -10,15 +10,18 @@ import {
 } from "../components/common/UI.jsx";
 import ItemCard from "../components/items/ItemCard.jsx";
 import ItemFilters from "../components/items/ItemFilters.jsx";
+import FilterSelect from "../components/items/FilterSelect.jsx";
 import { useCollection } from "../features/items/useItems.js";
 import { filterItems } from "../features/items/itemsSelectors.js";
 import styles from "./Pages.module.css";
 
 export default function ItemsPage() {
-  const { items, status, error, complete, retry } = useCollection();
+  usePageTitle("Explore items");
+  const { items, status, error, retry } = useCollection();
+  const loaded = status === "succeeded";
   const [params, setParams] = useSearchParams();
-  const filters = useMemo(() => Object.fromEntries(params), [params]);
-  const filtered = useMemo(() => filterItems(items, filters), [items, filters]);
+  const filters = Object.fromEntries(params);
+  const filtered = filterItems(items, filters);
   function change(key, value) {
     const next = new URLSearchParams(params);
     if (value) next.set(key, value);
@@ -33,7 +36,7 @@ export default function ItemsPage() {
         action={
           <Button to="/items/new">
             <Plus size={17} />
-            Report an item
+            Add an item
           </Button>
         }
       >
@@ -47,22 +50,22 @@ export default function ItemsPage() {
       />
       <div className={styles.resultsBar}>
         <p>
-          <strong>{complete ? filtered.length : "—"}</strong>{" "}
+          <strong>{loaded ? filtered.length : "—"}</strong>{" "}
           {filtered.length === 1 ? "item" : "items"} on the noticeboard
         </p>
-        <label>
-          <ArrowDownUp size={13} aria-hidden="true" />
-          <span className="sr-only">Sort reports</span>
-          <select
-            value={filters.sort || "newest"}
-            onChange={(event) => change("sort", event.target.value)}
-          >
-            <option value="newest">Newest first</option>
-            <option value="oldest">Oldest first</option>
-          </select>
-        </label>
+        <FilterSelect
+          label="Sort items"
+          icon={<ArrowDownUp size={14} aria-hidden="true" />}
+          value={filters.sort || "newest"}
+          options={[
+            { value: "newest", label: "Newest first" },
+            { value: "oldest", label: "Oldest first" },
+          ]}
+          onChange={(value) => change("sort", value)}
+          compact
+        />
       </div>
-      {(status === "loading" && !complete) || status === "idle" ? (
+      {status === "loading" || status === "idle" ? (
         <LoadingSkeleton />
       ) : error ? (
         <ErrorState message={error.message} onRetry={retry} />
@@ -81,8 +84,8 @@ export default function ItemsPage() {
       <div className={`notice ${styles.listNotice}`}>
         <Info size={17} />
         <p>
-          Recognize an item? Open the report for details and any contact
-          information. Reports are shared by the community and aren’t verified.
+          Recognize an item? Open the item for details and any contact
+          information. Items are shared by the community and aren’t verified.
         </p>
       </div>
     </div>

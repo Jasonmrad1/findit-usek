@@ -1,11 +1,10 @@
 import { Router } from "express";
+import * as itemController from "../controllers/itemController.js";
 
-export function itemRoutes(controller) {
-  const router = Router();
-  router.get("/", controller.list);
-  router.get("/:id", controller.get);
-  router.post("/", controller.create);
-  router.put("/:id", controller.update);
-  router.delete("/:id", controller.remove);
-  return router;
-}
+export const itemRoutes = Router();
+
+itemRoutes.get("/", itemController.list);
+itemRoutes.get("/:id", itemController.get);
+itemRoutes.post("/", itemController.create);
+itemRoutes.put("/:id", itemController.update);
+itemRoutes.delete("/:id", itemController.remove);

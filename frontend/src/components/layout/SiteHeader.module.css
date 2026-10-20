@@ -86,7 +86,7 @@
 .linkArrow {
   display: none;
 }
-.reportAction {
+.itemAction {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -98,7 +98,7 @@
   color: var(--primary);
   text-decoration: none;
 }
-.reportAction > span {
+.itemAction > span {
   display: grid;
   place-items: center;
   width: 32px;
@@ -110,7 +110,7 @@
     background 0.16s ease,
     transform 0.16s ease;
 }
-.reportAction:hover > span {
+.itemAction:hover > span {
   background: #062f5e;
   transform: translate(2px, -2px);
 }
@@ -146,7 +146,7 @@
   .links a {
     font-size: 12px;
   }
-  .reportAction {
+  .itemAction {
     gap: 10px;
   }
 }
@@ -224,7 +224,7 @@
     display: block;
     color: #687b91;
   }
-  .reportAction {
+  .itemAction {
     width: 100%;
     min-height: 48px;
     margin-top: 16px;

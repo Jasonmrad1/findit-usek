@@ -16,7 +16,7 @@ export async function request(
   } catch {
     throw {
       message:
-        "We couldn’t reach FindIt. Check that the API is running, then try again.",
+        "We couldn't reach FindIt. Check that the API is running, then try again.",
     };
   }
   if (response.status === 204) return null;

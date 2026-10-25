@@ -31,7 +31,7 @@ export default function SiteFooter() {
           <p>
             One campus. A thousand everyday stories.
             <br />
-            Let’s give a few of them a happy ending.
+            Let's give a few of them a happy ending.
           </p>
           <Link to="/items/new">
             Share a lost or found item <ArrowRight size={15} />

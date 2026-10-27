@@ -129,7 +129,7 @@ export default function ItemFormPage({ mode = "create" }) {
         title={
           mode === "edit"
             ? "Keep the story up to date."
-            : "Let’s get it back where it belongs."
+            : "Let's get it back where it belongs."
         }
       >
         {mode === "edit"

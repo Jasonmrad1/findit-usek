@@ -177,7 +177,7 @@ $item = @{
   date = '2026-10-15'
   returned = $false
   contactEmail = ''
-  imageUrl = 'https://images.pexels.com/photos/5905437/pexels-photo-5905437.jpeg'
+  imageUrl = 'https://images.pexels.com/photos/5905437/pexels-photo-5905437.jpeg?auto=compress&cs=tinysrgb&w=1200'
   locationImageUrl = ''
 } | ConvertTo-Json
 

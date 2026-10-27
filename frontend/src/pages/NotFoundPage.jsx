@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         <Compass size={65} strokeWidth={1} />
         <span className="eyebrow">404 · A LITTLE OFF CAMPUS</span>
         <h1 tabIndex={-1}>This page seems to be lost.</h1>
-        <p>Let’s get you back to something familiar.</p>
+        <p>Let's get you back to something familiar.</p>
         <div className="button-row">
           <Button to="/">Back home</Button>
           <Button to="/items" variant="secondary">

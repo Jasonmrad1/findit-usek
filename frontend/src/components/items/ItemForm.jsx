@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import {
   ArrowRight,
+  Grid2X2,
   ImagePlus,
   Info,
   Mail,
@@ -15,8 +16,13 @@ import {
   validateItem,
   isImageUrl,
 } from "../../../../shared/itemValidation.js";
-import { Button, Field, ErrorSummary } from "../common/UI.jsx";
+import {
+  Button,
+  ErrorSummary,
+  Field,
+} from "../common/UI.jsx";
 import ItemPhoto from "./ItemPhoto.jsx";
+import FilterSelect from "./FilterSelect.jsx";
 import styles from "./Form.module.css";
 
 function PhotoPreview({ url, label }) {
@@ -33,7 +39,7 @@ function PhotoPreview({ url, label }) {
       />
       {failed === preview && (
         <p className={styles.previewWarning}>
-          This image couldn’t be loaded. You can still save the link or try
+          This image couldn't be loaded. You can still save the link or try
           another URL.
         </p>
       )}
@@ -104,7 +110,7 @@ export default function ItemForm({
         </div>
         <fieldset className={styles.typeField}>
           <legend>
-            I’m adding something… <span>*</span>
+            I'm adding something… <span>*</span>
           </legend>
           <div>
             {TYPES.map((type) => (
@@ -139,18 +145,38 @@ export default function ItemForm({
           maxLength={100}
           {...field("title")}
         />
-        <Field
-          label="Category"
-          name="category"
-          as="select"
-          required
-          {...field("category")}
-        >
-          <option value="">Choose a category</option>
-          {CATEGORIES.map((category) => (
-            <option key={category}>{category}</option>
-          ))}
-        </Field>
+        <div className={`field ${errors.category ? "field--error" : ""}`}>
+          <label htmlFor="category">
+            Category<span className="required-mark"> *</span>
+          </label>
+          <FilterSelect
+            id="category"
+            label="Category"
+            icon={<Grid2X2 size={16} aria-hidden="true" />}
+            value={values.category}
+            options={[
+              { value: "", label: "Choose a category" },
+              ...CATEGORIES.map((category) => ({
+                value: category,
+                label: category,
+              })),
+            ]}
+            onChange={(value) => {
+              setValues((current) => ({ ...current, category: value }));
+              setServerErrors((current) => {
+                const next = { ...current };
+                delete next.category;
+                return next;
+              });
+            }}
+            error={errors.category}
+          />
+          {errors.category && (
+            <p className="field-error" id="category-error">
+              {errors.category}
+            </p>
+          )}
+        </div>
         <Field
           label="Description"
           name="description"
@@ -280,9 +306,9 @@ export default function ItemForm({
       <div className={`notice ${styles.privacy}`}>
         <ShieldCheck size={18} />
         <p>
-          <strong>A little care for everyone’s privacy.</strong>
+          <strong>A little care for everyone's privacy.</strong>
           <br />
-          Please don’t share personal ID photos, sensitive information, or
+          Please don't share personal ID photos, sensitive information, or
           details that could identify someone without their permission.
         </p>
       </div>

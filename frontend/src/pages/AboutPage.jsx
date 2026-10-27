@@ -41,7 +41,7 @@ export default function AboutPage() {
           <h2>
             We share a campus.
             <br />
-            <span>Let’s look out for each other.</span>
+            <span>Let's look out for each other.</span>
           </h2>
         </div>
         <div>
@@ -51,7 +51,7 @@ export default function AboutPage() {
           </p>
           <p>
             FindIt brings those moments into one shared space. Somewhere to look
-            for what you’re missing. Somewhere to share what you’ve found.
+            for what you're missing. Somewhere to share what you've found.
             Somewhere a small act of kindness can turn a day around.
           </p>
           <p>

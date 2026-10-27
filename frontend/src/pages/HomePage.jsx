@@ -3,12 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { ArrowRight, ArrowUpRight, Search, MapPin, Plus } from "lucide-react";
-import {
-  Button,
-  EmptyState,
-  ErrorState,
-  LoadingSkeleton,
-} from "../components/common/UI.jsx";
+import { Button, EmptyState, ErrorState, LoadingSkeleton } from "../components/common/UI.jsx";
 import ItemCard from "../components/items/ItemCard.jsx";
 import { useCollection } from "../features/items/useItems.js";
 import { selectRecent, selectStats } from "../features/items/itemsSelectors.js";
@@ -51,7 +46,7 @@ export default function HomePage() {
             </h1>
             <p>
               Some things are too familiar to leave behind.
-              <br className={styles.desktopBreak} /> Let’s help them find their
+              <br className={styles.desktopBreak} /> Let's help them find their
               way back.
             </p>
             <div className={styles.heroActions}>
@@ -130,7 +125,7 @@ export default function HomePage() {
       <section className={`container ${styles.recent}`}>
         <div className={styles.sectionTop}>
           <span className="eyebrow">THE CAMPUS NOTICEBOARD</span>
-          <span className={styles.sectionIndex}>01 / WHAT’S NEW</span>
+          <span className={styles.sectionIndex}>01 / WHAT'S NEW</span>
         </div>
         <div className="section-heading">
           <div>
@@ -228,7 +223,7 @@ export default function HomePage() {
             [
               "02",
               "Share the details.",
-              "A clear description. A campus location. A photo if you have one. That’s all it takes to start.",
+              "A clear description. A campus location. A photo if you have one. That's all it takes to start.",
               "/items/new",
               "Create an item",
             ],
@@ -237,7 +232,7 @@ export default function HomePage() {
               "Make a connection.",
               "Recognize something? Open the item and use its contact email to reach out.",
               "/items?type=Found",
-              "See what’s been found",
+              "See what's been found",
             ],
           ].map(([number, title, text, to, label]) => (
             <div className={styles.step} key={number}>
@@ -261,7 +256,7 @@ export default function HomePage() {
         />
         <div className={`container ${styles.ctaInner}`}>
           <div>
-            <span className="eyebrow">BE SOMEONE’S GOOD NEWS</span>
+            <span className="eyebrow">BE SOMEONE'S GOOD NEWS</span>
             <h2>
               Found something?
               <br />
@@ -272,7 +267,7 @@ export default function HomePage() {
             <p>
               A minute of your time.
               <br />
-              One less thing on someone’s mind.
+              One less thing on someone's mind.
             </p>
             <Button to="/items/new">
               Add an item <ArrowUpRight size={18} />

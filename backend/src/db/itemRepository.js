@@ -1,7 +1,7 @@
-import * as itemData from "../data/items.js";
+import { items as seedItems } from "../data/items.js";
 
-let items = itemData.createSeedItems();
-let nextId = items.reduce((max, item) => Math.max(max, item.id), 0) + 1;
+let items = seedItems.map((item) => ({ ...item }));
+let nextId = Math.max(...items.map((item) => item.id), 0) + 1;
 
 export function findAll() {
   return items.map((item) => ({ ...item }));

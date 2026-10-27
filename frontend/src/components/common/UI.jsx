@@ -75,9 +75,9 @@ export function ErrorState({ message, onRetry, missing = false }) {
         <AlertCircle size={28} />
       </span>
       <h2>
-        {missing ? "This item isn’t here" : "A little connection trouble"}
+        {missing ? "This item isn't here" : "A little connection trouble"}
       </h2>
-      <p>{message || "We couldn’t load this page. Please try again."}</p>
+      <p>{message || "We couldn't load this page. Please try again."}</p>
       <div className="button-row">
         {onRetry && <Button onClick={onRetry}>Try again</Button>}
         <Button to="/items" variant="secondary">

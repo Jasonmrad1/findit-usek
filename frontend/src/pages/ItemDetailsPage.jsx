@@ -161,7 +161,7 @@ export default function ItemDetailsPage() {
             <div className="notice">
               <ShieldCheck size={19} />
               <p>
-                Items and photos are shared by the community. FindIt doesn’t
+                Items and photos are shared by the community. FindIt doesn't
                 verify ownership or arrange returns. Avoid sharing sensitive
                 personal information.
               </p>

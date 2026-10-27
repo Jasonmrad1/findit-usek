@@ -9,8 +9,11 @@ export default function FilterSelect({
   options,
   onChange,
   compact = false,
+  id: controlId,
+  error = false,
 }) {
-  const id = useId();
+  const generatedId = useId();
+  const id = controlId || generatedId;
   const root = useRef(null);
   const trigger = useRef(null);
   const typeahead = useRef({ text: "", time: 0 });
@@ -95,19 +98,22 @@ export default function FilterSelect({
 
   return (
     <div
-      className={`${styles.root} ${compact ? styles.compact : ""}`}
+      className={`${styles.root} ${compact ? styles.compact : ""} ${error ? styles.invalid : ""}`}
       ref={root}
       onBlur={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
     >
       <button
+        id={id}
         ref={trigger}
         type="button"
         role="combobox"
         aria-label={label}
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
         aria-controls={`${id}-options`}
         aria-activedescendant={open ? `${id}-${active}` : undefined}
         className={`${styles.trigger} ${value ? styles.selected : ""}`}

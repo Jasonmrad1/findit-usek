@@ -40,7 +40,7 @@ export default function ItemsPage() {
           </Button>
         }
       >
-        Help the next chapter be a happy one. Explore what’s been lost and found
+        Help the next chapter be a happy one. Explore what's been lost and found
         around campus.
       </PageIntro>
       <ItemFilters
@@ -85,7 +85,7 @@ export default function ItemsPage() {
         <Info size={17} />
         <p>
           Recognize an item? Open the item for details and any contact
-          information. Items are shared by the community and aren’t verified.
+          information. Items are shared by the community and aren't verified.
         </p>
       </div>
     </div>

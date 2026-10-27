@@ -1,11 +1,7 @@
-// Everyday item-in-context photos. Sources are recorded in ASSET_CREDITS.md.
-const photoUrl = (source) =>
-  typeof source === "string"
-    ? source
-    : `https://images.pexels.com/photos/${source}/pexels-photo-${source}.jpeg?auto=compress&cs=tinysrgb&w=1200`;
-
-const records = [
+export const items = [
   {
+    id: 1,
+    contactEmail: "student1@example.com",
     title: "Black wired earphones",
     description:
       "Found these black wired earphones left on a wooden study table. The cable was tangled beside a chair. Please describe them if they are yours.",
@@ -14,10 +10,12 @@ const records = [
     location: "Library study table",
     date: "2026-10-15",
     returned: false,
-    photoId: 15575695,
-    placeId: 17154532,
+    imageUrl: "https://images.pexels.com/photos/15575695/pexels-photo-15575695.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/17154532/pexels-photo-17154532.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 2,
+    contactEmail: "student2@example.com",
     title: "Backpack left on a bench",
     description:
       "I left my brown and gray backpack on a bench between classes. There are lecture notes inside. Please get in touch if you picked it up.",
@@ -26,10 +24,12 @@ const records = [
     location: "Campus courtyard",
     date: "2026-10-15",
     returned: false,
-    photoId: 8249067,
-    placeId: "/images/usek-sunlit.png",
+    imageUrl: "https://images.pexels.com/photos/8249067/pexels-photo-8249067.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "/images/usek-sunlit.png",
   },
   {
+    id: 3,
+    contactEmail: "student3@example.com",
     title: "Keys beside a black bag",
     description:
       "Found a set of keys on a wooden bench beside a black bag and some notes. Please describe the keyring privately so I can return them to the right person.",
@@ -38,10 +38,12 @@ const records = [
     location: "Courtyard benches",
     date: "2026-10-14",
     returned: false,
-    photoId: 15817543,
-    placeId: "/images/usek-sunlit.png",
+    imageUrl: "https://images.pexels.com/photos/15817543/pexels-photo-15817543.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "/images/usek-sunlit.png",
   },
   {
+    id: 4,
+    contactEmail: "student4@example.com",
     title: "Charger from a study desk",
     description:
       "I think I left my charger at the desk after studying. This photo shows it with my usual study things. Please message me if you have seen it.",
@@ -50,10 +52,12 @@ const records = [
     location: "Library study area",
     date: "2026-10-14",
     returned: false,
-    photoId: 10567179,
-    placeId: 17154532,
+    imageUrl: "https://images.pexels.com/photos/10567179/pexels-photo-10567179.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/17154532/pexels-photo-17154532.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 5,
+    contactEmail: "student5@example.com",
     title: "Open lecture notebook",
     description:
       "There was an open notebook left with papers on a classroom desk after the lecture. Please describe the notes or the cover if it belongs to you.",
@@ -62,10 +66,12 @@ const records = [
     location: "Classroom B204",
     date: "2026-10-13",
     returned: false,
-    photoId: 5905437,
-    placeId: 37846333,
+    imageUrl: "https://images.pexels.com/photos/5905437/pexels-photo-5905437.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/37846333/pexels-photo-37846333.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 6,
+    contactEmail: "student6@example.com",
     title: "Campus hoodie",
     description:
       "My hoodie was left behind after lunch. Someone helped me get it back. Thank you for taking the time to reach out!",
@@ -74,10 +80,12 @@ const records = [
     location: "Cafeteria",
     date: "2026-10-12",
     returned: true,
-    photoId: 17967390,
-    placeId: 34316837,
+    imageUrl: "https://images.pexels.com/photos/17967390/pexels-photo-17967390.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/34316837/pexels-photo-34316837.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 7,
+    contactEmail: "student7@example.com",
     title: "Wallet left on a table",
     description:
       "Found a wallet with a set of keys on a wooden table near the seating area. Please describe what is inside privately before we arrange a handover.",
@@ -86,10 +94,12 @@ const records = [
     location: "Cafeteria seating area",
     date: "2026-10-12",
     returned: false,
-    photoId: 13370914,
-    placeId: 34316837,
+    imageUrl: "https://images.pexels.com/photos/13370914/pexels-photo-13370914.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/34316837/pexels-photo-34316837.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 8,
+    contactEmail: "student8@example.com",
     title: "Calculator and study notes",
     description:
       "I left my calculator with an open notebook after studying. I only noticed when I got to my next class. Please let me know if you have seen it.",
@@ -98,10 +108,12 @@ const records = [
     location: "Library study area",
     date: "2026-10-11",
     returned: false,
-    photoId: 8250947,
-    placeId: 17154532,
+    imageUrl: "https://images.pexels.com/photos/8250947/pexels-photo-8250947.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/17154532/pexels-photo-17154532.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 9,
+    contactEmail: "student9@example.com",
     title: "Patterned water bottle",
     description:
       "This patterned bottle was left on a desk after class. It has now been returned to its owner. Thanks for helping us reconnect!",
@@ -110,10 +122,12 @@ const records = [
     location: "Classroom B204",
     date: "2026-10-10",
     returned: true,
-    photoId: 9544546,
-    placeId: 37846333,
+    imageUrl: "https://images.pexels.com/photos/9544546/pexels-photo-9544546.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/37846333/pexels-photo-37846333.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 10,
+    contactEmail: "student10@example.com",
     title: "Folder with course papers",
     description:
       "I left my folder with a few printed course papers on the wooden table. Please get in touch if you found it after the afternoon study session.",
@@ -122,10 +136,12 @@ const records = [
     location: "Library study area",
     date: "2026-10-09",
     returned: false,
-    photoId: 6325886,
-    placeId: 17154532,
+    imageUrl: "https://images.pexels.com/photos/6325886/pexels-photo-6325886.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/17154532/pexels-photo-17154532.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 11,
+    contactEmail: "student11@example.com",
     title: "Sunglasses on a wooden seat",
     description:
       "Found these sunglasses on a wooden surface near the outdoor seating. Please describe the frame and lenses when you reach out.",
@@ -134,10 +150,12 @@ const records = [
     location: "Courtyard benches",
     date: "2026-10-08",
     returned: false,
-    photoId: 13047943,
-    placeId: "/images/usek-sunlit.png",
+    imageUrl: "https://images.pexels.com/photos/13047943/pexels-photo-13047943.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "/images/usek-sunlit.png",
   },
   {
+    id: 12,
+    contactEmail: "student12@example.com",
     title: "Black over-ear headphones",
     description:
       "Looking for my black headphones. This is a photo of them on my desk before I brought them to campus. I may have left them in the classroom.",
@@ -146,10 +164,12 @@ const records = [
     location: "Classroom B204",
     date: "2026-10-07",
     returned: false,
-    photoId: 8198068,
-    placeId: 37846333,
+    imageUrl: "https://images.pexels.com/photos/8198068/pexels-photo-8198068.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/37846333/pexels-photo-37846333.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 13,
+    contactEmail: "student13@example.com",
     title: "Pencil case from a study table",
     description:
       "Found a pencil case left where someone had been working on their notes. Please describe the case and a few things inside so I can return it.",
@@ -158,10 +178,12 @@ const records = [
     location: "Library study area",
     date: "2026-10-06",
     returned: false,
-    photoId: 5553627,
-    placeId: 17154532,
+    imageUrl: "https://images.pexels.com/photos/5553627/pexels-photo-5553627.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "https://images.pexels.com/photos/17154532/pexels-photo-17154532.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
+    id: 14,
+    contactEmail: "student14@example.com",
     title: "Book left on a bench",
     description:
       "I left my book and pen on a bench while taking a break between classes. There are notes tucked inside. Please let me know if you picked them up.",
@@ -170,17 +192,7 @@ const records = [
     location: "Courtyard benches",
     date: "2026-10-05",
     returned: false,
-    photoId: 18329403,
-    placeId: "/images/usek-sunlit.png",
+    imageUrl: "https://images.pexels.com/photos/18329403/pexels-photo-18329403.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    locationImageUrl: "/images/usek-sunlit.png",
   },
 ];
-
-export function createSeedItems() {
-  return records.map(({ photoId, placeId, ...item }, index) => ({
-    id: index + 1,
-    ...item,
-    contactEmail: `student${index + 1}@example.com`,
-    imageUrl: photoUrl(photoId),
-    locationImageUrl: photoUrl(placeId),
-  }));
-}

@@ -13,28 +13,16 @@ import styles from "./Pages.module.css";
 
 export default function ContactPage() {
   usePageTitle("Contact");
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [success, setSuccess] = useState(false);
   const summaryRef = useRef(null);
   const successRef = useRef(null);
-  const allErrors = validateContact(values);
+  const allErrors = validateContact({ name, email, subject, message });
   const errors = submitted ? allErrors : {};
-  function field(name) {
-    return {
-      value: values[name],
-      error: errors[name],
-      onChange: (event) => {
-        setSuccess(false);
-        setValues((current) => ({ ...current, [name]: event.target.value }));
-      },
-    };
-  }
   function submit(event) {
     event.preventDefault();
     setSubmitted(true);
@@ -48,7 +36,7 @@ export default function ContactPage() {
   return (
     <div className="container page">
       <PageIntro
-        eyebrow="WE’RE ALL EARS"
+        eyebrow="WE'RE ALL EARS"
         title="A little conversation starts here."
       >
         A question, a suggestion, or an idea to make campus life a little
@@ -104,7 +92,12 @@ export default function ContactPage() {
             autoComplete="name"
             maxLength={100}
             placeholder="Your name"
-            {...field("name")}
+            value={name}
+            error={errors.name}
+            onChange={(event) => {
+              setSuccess(false);
+              setName(event.target.value);
+            }}
           />
           <Field
             label="Email address"
@@ -114,15 +107,25 @@ export default function ContactPage() {
             autoComplete="email"
             maxLength={254}
             placeholder="you@example.com"
-            {...field("email")}
+            value={email}
+            error={errors.email}
+            onChange={(event) => {
+              setSuccess(false);
+              setEmail(event.target.value);
+            }}
           />
           <Field
             label="Subject"
             name="subject"
             required
             maxLength={120}
-            placeholder="What’s on your mind?"
-            {...field("subject")}
+            placeholder="What's on your mind?"
+            value={subject}
+            error={errors.subject}
+            onChange={(event) => {
+              setSuccess(false);
+              setSubject(event.target.value);
+            }}
           />
           <Field
             label="Message"
@@ -132,7 +135,12 @@ export default function ContactPage() {
             maxLength={2000}
             placeholder="Tell us a little more…"
             rows={5}
-            {...field("message")}
+            value={message}
+            error={errors.message}
+            onChange={(event) => {
+              setSuccess(false);
+              setMessage(event.target.value);
+            }}
           />
           <div className={styles.contactSubmit}>
             <span role="status" tabIndex={-1} ref={successRef}>
